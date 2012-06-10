@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+{% block title%}手机号码验证-{{ title }}{% endblock %}
+{% block fields %}
+		<dd>
+			{{ form.phone_num.errors }}
+			<label for='phone_num'>手机号:</label>
+			{{ form.phone_num }}
+			<a id="get_code" href='../get_code/'>点此获取验证码</a>
+		</dd>
+		<dd>
+			{{ form.code.errors }}
+			<label for='code'>验证码:</label>
+			{{ form.code }}
+		</dd>
+		<input type="hidden" name="action" value='{{ action }}' title="{{ title }}">
+{% endblock %}

@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//weather/PyWapFetion/AliveKeeper.py=utf-8
+encoding//weather/PyWapFetion/Errors.py=utf-8
+encoding//weather/PyWapFetion/Fetion.py=utf-8
+encoding//weather/admin.py=utf-8
+encoding//weather/cron.py=utf-8
+encoding//weather/day.py=utf-8
+encoding//weather/forms.py=utf-8
+encoding//weather/models.py=utf-8
+encoding//weather/send.py=utf-8
+encoding//weather/thread.py=utf-8
+encoding//weather/views.py=utf-8
+encoding/settings.py=utf-8

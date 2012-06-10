@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %} {{ announce }} {% endblock %}
+{% block content %}
+ <strong>{{ announce }}</strong>,感谢使用本程序，此服务免费<br/>
+ {% ifnotequal user None %}
+ 你的订阅信息:
+ 手机号码:{{ user.phone_num }}
+ 飞信ID:{{user.fid}}
+ 订阅城市/发送时间 :{{user.wid.cid.city}}/{{user.wid.get_hour_display}}
+ 订阅类型:
+ {{user.get_sub_type_display}}
+ 
+{% endifnotequal %}
+{% endblock %}

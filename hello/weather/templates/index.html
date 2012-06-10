@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% comment %}
+{% load static %}
+{% get_static_prefix as STATIC_PREFIX %}
+{% endcomment %}
+
+{% block js %}
+{{ block.super }}
+<script type="text/javascript" src="{{ STATIC_URL }}weather/jdata.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}weather/main.js"></script>
+{% endblock %}
+{% block title %} 首页 {% endblock %}
+
+{% block content %}
+<h1>飞信天气</h1>
+{% block nav %}
+<div id="nav">
+	<a href="/weather/verify/update/">更改订阅</a>
+	<a href="/weather/verify/deactive/">退订</a>
+	<a href="/weather/verify/active/">重新激活</a>	
+</div>
+{% endblock %}
+
+{% ifnotequal msg None %}
+<div id='msg'>{{ msg|escape }}</div>
+{% endifnotequal %}
+
+{% ifnotequal form None %}
+	<form action="" method="post" id="{{ form_id }}">
+	{% if form.errors %}
+	    <p style="color: red;font-weight: bold">
+	        {# Please correct the error{{ form.errors|pluralize }} below. #}
+	         出错了，请检查相关字段
+	    </p>
+	{% endif %}	
+		
+		
+	<dl>
+		{% if not form.phone_num %} <dt>设置你的订阅信息</dt>{% endif %}
+	{% comment %}	
+		{{ form.as_ul }}
+	{% endcomment %}
+		{% block fields %}
+		<dd>
+			{{ form.province.errors }}
+			{{ form.city.errors }}
+			<label for='province'>省份地区:</label>
+			{{ form.province }}	
+			<label for='city'>城市:</label>
+			{{ form.city }}
+		</dd>
+		{% if form.phone_num %}
+		<dd>
+			{{ form.phone_num.errors }}
+			<label for='phone_num'>手机号码:</label>
+			{{ form.phone_num }}
+		</dd>
+		{% endif %}
+		<dd>
+			{{ form.hour.errors }}
+			<label for='hour'>发送时间:</label>
+			{{ form.hour }}
+		</dd>
+		
+		<dd id="sub_type">
+			{{ form.sub_type.errors }}
+			<label for='sub_type'>订阅类型:</label>
+			{{ form.sub_type }}
+			
+		</dd>	
+		{% endblock %}
+		 
+	</dl>
+	{% csrf_token %}
+	<input type="submit" value="Submit">
+	
+	</form>	
+
+{% endifnotequal %}
+{% endblock %}

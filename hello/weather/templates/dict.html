@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+
+<title></title>
+</head>
+<body>
+
+  {% for item,value in metas.iteritems reversed %}
+    {% if forloop.first %}<ul> {% endif %}
+      <li>{{ item.lower }} : {{ value }}</li>
+    {% if forloop.last %}</ul> {% endif %}
+  {% empty %}
+    <p>迭代对象为空</p>
+  {% endfor %}
+
+</body>
+</html>
