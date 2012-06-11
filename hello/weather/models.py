@@ -45,7 +45,7 @@ class User(models.Model):
     phone_num = models.CharField(max_length = 11)
     wid = models.ForeignKey(Weather,verbose_name=u'订阅城市/发送时间')
     sub_type = models.CharField(verbose_name=u'订阅类型',max_length=1,default='E',choices=TYPE_CHOICES) #订阅类型分别为每天一条短信和只有坏天气时发送短信
-    reg_ts = models.DateTimeField(verbose_name=u'注册时间',auto_now=True)
+    reg_ts = models.DateTimeField(verbose_name=u'注册/更改时间',auto_now=True)
     active = models.BooleanField(default=True,verbose_name="是否激活")
     
     def __unicode__(self):

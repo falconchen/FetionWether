@@ -8,10 +8,12 @@ if HERE not in sys.path:
 
 STATIC_PATH=os.path.join(HERE, 'medias').replace('\\','/')
 import json
-json_file =r'F:\cygwin\home\dotcloud\environment.json' if os.sep =='\\' else '/home/dotcloud/environment.json'
+#json_file =r'F:\cygwin\home\dotcloud\environment.json' if os.sep =='\\' else '/home/dotcloud/environment.json'
+json_file = os.path.abspath(os.path.join(HERE,os.path.pardir,os.path.pardir,'environment.json'))
+print json_file
 
 with open(json_file) as f:
-    env = json.load(f)
+    env = json.load(f,encoding='utf-8')
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -20,10 +22,11 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
-FETION =(
-         ('13556152752','7340985cxm','飞信天气'),
-         ('13714681456','7340985cxm','飞信天气'),  
-         )
+#FETION =(
+#         ('13556152752','7340985cxm','飞信天气'),
+#         ('13714681456','7340985cxm','飞信天气'),  
+ #        )
+FETION = env['FETION']
 
 MANAGERS = ADMINS
 

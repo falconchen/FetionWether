@@ -12,7 +12,7 @@ import settings
 
 PHONE = settings.FETION[0][0]
 PSW = settings.FETION[0][1]
-NICK = settings.FETION[0][2]
+NICK = settings.FETION[0][2].encode('utf-8')
 
 def index(request):
     msg = None

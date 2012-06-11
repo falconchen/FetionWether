@@ -74,7 +74,7 @@ class Fetion(object):
         except: return None
         
     def findid(self,mobile):
-        if hasattr(self,'cache'):
+        if hasattr(self,'cache') and self.cache is not None:
             id = self.cache[mobile]
             if id is None: self.cache[mobile] = id = self._getid(mobile)#缓存中没有，获取ID并存入。
             return id
