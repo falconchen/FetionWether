@@ -32,9 +32,6 @@ def index(request):
                 weather.save()
             
             #发送加为好友的短信
-#            phone = settings.FETION[0][0]
-#            psw = settings.FETION[0][1]
-#            ft = Fetion(phone, psw, cachefile=None)
             ft = MyFetion(PHONE,PSW)
             ft.addfriend(cd['phone_num'], NICK, '2')
 
