@@ -22,10 +22,6 @@ ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
 )
 
-#FETION =(
-#         ('13556152752','7340985cxm','飞信天气'),
-#         ('13714681456','7340985cxm','飞信天气'),  
- #        )
 FETION = env['FETION']
 
 MANAGERS = ADMINS
