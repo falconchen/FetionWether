@@ -15,7 +15,7 @@ PSW = settings.FETION[0][1]
 NICK = settings.FETION[0][2].encode('utf-8')
 
 def index(request):
-    msg = None
+    msg = '请先填写手机号码和订阅信息'
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
@@ -90,7 +90,7 @@ def verify(request, action):
                 raise Http404('无效用户')      
     else :
         form = VerifyForm()
-        msg = '请先验证手机'
+        msg = '请先验证手机,然后%s。' % title
     return render_to_response('verify.html', {'form':form, 'title':title, 'msg':msg, 'form_id':'verify', 'action':action}, context_instance=RequestContext(request))
 
 def update(request):
@@ -125,8 +125,8 @@ def update(request):
                 
                 request.session['announce'] = '更改成功 '
                 request.session['user'] = u
-                if not settings.DEBUG:   
-                    del request.session['update_phone_num']        
+                #if not settings.DEBUG:   
+                del request.session['update_phone_num']        
                 return HttpResponseRedirect('/weather/announce/')
                                                 
             #表单字段无效时
@@ -147,12 +147,12 @@ def announce(request):
         announce = request.session['announce']
         user = request.session.setdefault('user', None)
         #if not settings.DEBUG: 
-        #del request.session['announce']
+        del request.session['announce']
         del request.session['user']
-        return render_to_response('announce.html', {'announce':announce, 'user':user})
+        return render_to_response('announce.html', {'msg':announce, 'user':user},context_instance=RequestContext(request))
     except Exception, e:
-        raise e 
-        #raise Http404('非法请求')
+        #raise e 
+        raise Http404('非法请求')
 
 
 #退订与重新激活

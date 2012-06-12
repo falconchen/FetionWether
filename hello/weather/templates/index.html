@@ -15,17 +15,23 @@
 <h1>飞信天气</h1>
 {% block nav %}
 <div id="nav">
+    <span class="leftBorder"></span>
+    <a href="/weather/">我要订阅</a>
 	<a href="/weather/verify/update/">更改订阅</a>
 	<a href="/weather/verify/deactive/">退订</a>
 	<a href="/weather/verify/active/">重新激活</a>	
+    <span class="rightBorder"></span>
 </div>
 {% endblock %}
-
+<div class="subTitle">
 {% ifnotequal msg None %}
 <div id='msg'>{{ msg|escape }}</div>
 {% endifnotequal %}
+</div>
+
 
 {% ifnotequal form None %}
+<div id="content_wrap">
 	<form action="" method="post" id="{{ form_id }}">
 	{% if form.errors %}
 	    <p style="color: red;font-weight: bold">
@@ -51,9 +57,10 @@
 		</dd>
 		{% if form.phone_num %}
 		<dd>
-			{{ form.phone_num.errors }}
+			
 			<label for='phone_num'>手机号码:</label>
 			{{ form.phone_num }}
+           {{ form.phone_num.errors }}
 		</dd>
 		{% endif %}
 		<dd>
@@ -72,9 +79,10 @@
 		 
 	</dl>
 	{% csrf_token %}
-	<input type="submit" value="Submit">
+	<input class="submit" type="submit" value="确定">
 	
 	</form>	
-
+</div>
 {% endifnotequal %}
+
 {% endblock %}

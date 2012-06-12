@@ -6,6 +6,8 @@
 <script type="text/javascript" src="{{ STATIC_URL }}weather/jquery.js"></script>
 {% endblock %}
 {% block css %}
+
+<link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}weather/main.css" />
 <style type="text/css">
 dd {margin: 5px 0}
 ul,li {margin:0;padding:0}
@@ -17,12 +19,15 @@ ul,li {margin:0;padding:0}
 <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+<div id="wrapper">
 {% block content %}
 {% endblock %}
 
 {% block footer %}
-<hr>
-<p style="text-align:left">Django Powered ,Coded by Falcon just for fun. ^_^</p>
+<div id="footer">Django Powered, Coded by Falcon. 2012</div>
 {% endblock %}
+
+</div>
 </body>
+
 </html>
