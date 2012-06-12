@@ -46,6 +46,7 @@ body{background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     font-family: Ver
     margin: 0;
     padding: 4px 10px;
     border-bottom:none;
+    height:100%;
 }
 
 #footer{
