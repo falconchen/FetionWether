@@ -15,7 +15,7 @@ PSW = settings.FETION[0][1]
 NICK = settings.FETION[0][2].encode('utf-8')
 
 def index(request):
-    msg = '请先填写手机号码和订阅信息'
+    msg = '请先填写手机号码和订阅信息, 天气短信将发送到你的手机。'
     if request.method == 'POST':
         form = SubscribeForm(request.POST)
         if form.is_valid():
@@ -230,7 +230,7 @@ def get_code(request):
         #设置session
         request.session['phone_num'] = phone_num
         request.session['code'] = code
-        request.session.set_expiry(3000)                        
+        request.session.set_expiry(300)                        
         msg = '验证码已发送到你的手机，请在5分钟内输入，不区分大小写。' 
     else :
         msg = 'something wrong,retry please'
