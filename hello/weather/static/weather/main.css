@@ -70,6 +70,7 @@ body{background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     font-family: Ver
    /*border-bottom: 1px solid #336699;*/
     padding:20px;
 }
+#sub_info { padding:10px;}
 #footer{
     background: url("bg_newlist_op.png") repeat-x scroll 0 0 transparent;
     height: 27px;
@@ -95,5 +96,5 @@ dt{
     font-weight: bold;
 }
 #sub_info dd {
-    margin-left:15px;
+    margin-left:5px;
 }
