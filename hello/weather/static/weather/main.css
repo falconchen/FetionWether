@@ -5,6 +5,7 @@ h1 {
     padding: 0;
     text-align: left;
     text-decoration: none; 
+    font-size:20px;
 }
 body{background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     font-family: Verdana;
     font-size: 12px;}
