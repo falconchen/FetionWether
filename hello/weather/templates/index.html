@@ -9,14 +9,15 @@
 <script type="text/javascript" src="{{ STATIC_URL }}weather/jdata.js"></script>
 <script type="text/javascript" src="{{ STATIC_URL }}weather/main.js"></script>
 {% endblock %}
-{% block title %} 订阅首页 {% endblock %}
+{% block title %} 免费订制短信天气预报首页 {% endblock %}
 
 {% block content %}
 <h1><a href="/" title="用手机订阅你的天气">飞信天气</a></h1>
+<h2>免费为用户提供天气预报短信订制服务。</h2>
 {% block nav %}
 <div id="nav">
     <span class="leftBorder"></span>
-    <a href="/">我要订阅</a>
+    <a href="/">我要订制</a>
 	<a href="/weather/verify/update/">更改订阅</a>
 	<a href="/weather/verify/deactive/">退订</a>
 	<a href="/weather/verify/active/">重新激活</a>	
@@ -31,8 +32,9 @@
 </div>
 
 
+
 {% ifnotequal form None %}
-<div id="content_wrap">
+<div class="content_wrap">
 	<form action="" method="post" id="{{ form_id }}">
 	{% if form.errors %}
 	    <p style="color: red;font-weight: bold">
@@ -86,4 +88,22 @@
 </div>
 {% endifnotequal %}
 
+{% block about %}
+<dl id="about" class="content_wrap">
+<dt>订制说明：</dt>
+
+<dd>1. 免费为中国移动用户提供天气预报短信（通过中国移动飞信），提供两种订制方式。实用灵活。
+</dd>
+
+<dd>2. 输入手机号码，接受加为好友的飞信通知即可，提供本站退订或者在好友列表中删除本站飞信用户。</dd>
+
+<dd>3. 全部天气数据来自中央气象台中国天气网, 准确度高。</dd>
+
+<dd> 4. 本站承诺绝对不会公开用户个人隐私数据，更不会向用户发送天气预报以外的信息。
+</dd>
+<dd>5. 这是本人学习Python, <a href="www.djangoproject.com" target="_blank" >Django</a>, git ,dotcloud的实践项目， 非商业应用，完全开源。<a target="_blank" href="https://github.com/falconchen/FetionWether">项目主页</a></dd>
+
+<dd>6. 如果有建议或合作请联系作者本人:<a href="www.onephper.tk">Falcon</a> /qq:516974090/Email:falcon_chen#qq.com</dd>
+</dl>
+{% endblock %}
 {% endblock %}

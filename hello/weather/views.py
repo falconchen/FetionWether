@@ -87,7 +87,7 @@ def verify(request, action):
                 raise Http404('无效用户')      
     else :
         form = VerifyForm()
-        msg = '请先验证手机,然后%s。' % title
+        msg = '请先验证手机,然后才能%s。' % title
     return render_to_response('verify.html', {'form':form, 'title':title, 'msg':msg, 'form_id':'verify', 'action':action}, context_instance=RequestContext(request))
 
 def update(request):

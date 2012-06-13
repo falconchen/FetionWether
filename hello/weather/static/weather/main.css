@@ -1,15 +1,28 @@
-h1 {    
+h1,h2 {    
     color: #003366;
     font-weight: bold;
     margin: 0 0 10px;
     padding: 0;
     text-align: left;
     text-decoration: none; 
-    font-size:20px;
+    font-size:20px;   
+    float:left;
+
 }
+h2 {    
+    color: #003366;    
+    font-size:14px;
+    text-indent:1em;
+    
+    font-weight:normal;
+    float:right;
+    margin:15px 5px 5px 0;
+    
+}
+
 body{background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     font-family: Verdana;
     font-size: 12px;}
-#nav { background: url("guide_mid.png") repeat-x scroll 0 0 transparent; font-size: 12px; height: 24px; }
+#nav { background: url("guide_mid.png") repeat-x scroll 0 0 transparent; font-size: 12px; height: 24px;clear:both; }
 #nav a {
     
     color:#F7FFD4;
@@ -43,7 +56,7 @@ body{background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     font-family: Ver
 }
 #wrapper {width:600px;margin: 20px auto;}
 
-#content_wrap,#content_wrap_center {
+.content_wrap {
     background: url("bg_newslist.png") repeat-y scroll 0 0 transparent;
     border: 1px solid #336699;
     margin: 0;
@@ -52,6 +65,11 @@ body{background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     font-family: Ver
     height:100%;
 }
 
+#about {
+   /*margin-bottom:10px;*/
+   /*border-bottom: 1px solid #336699;*/
+    padding:20px;
+}
 #footer{
     background: url("bg_newlist_op.png") repeat-x scroll 0 0 transparent;
     height: 27px;
@@ -69,7 +87,7 @@ form{
 
 .submit{margin:0 0 0 120px}
 a {text-decoration:none}
-
+a:hover {color:#FF0000}
 h1 a {color:#003366}
 h1 a:hover {color:#D54E21}
 dt{  
