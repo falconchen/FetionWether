@@ -46,6 +46,9 @@ class SubscribeForm(forms.Form):
                 
         phone_num = self.cleaned_data['phone_num']
         #self.phone_num = phone_num
+        china_mobile_num = ('134','135','136','137','138','139','150','151','152','158','159','157','187','188','147')
+        if phone_num[0:3] not in china_mobile_num:
+            raise ValidationError('非中国移动号码不能注册')
         try:            
             user = User.objects.get(phone_num=phone_num)
         except User.DoesNotExist:
