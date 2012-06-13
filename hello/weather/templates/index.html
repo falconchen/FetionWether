@@ -3,6 +3,12 @@
 {% load static %}
 {% get_static_prefix as STATIC_PREFIX %}
 {% endcomment %}
+{% block meta %}
+{{ block.super }}
+<meta  name="keywords" content="免费短信, 天气预报, 飞信天气,">
+<meta  name="description" content="飞信免费天气预报短信订制服务。">
+{% endblock %}
+
 
 {% block js %}
 {{ block.super }}
@@ -12,8 +18,8 @@
 {% block title %} 免费订制短信天气预报首页 {% endblock %}
 
 {% block content %}
-<h1><a href="/" title="用手机订阅你的天气">飞信天气</a></h1>
-<h2>免费为用户提供天气预报短信订制服务。</h2>
+<h1><a href="/" title="用手机订阅你的天气">免费短信天气预报</a></h1>
+<h2>利用中国移动飞信提供免费的天气预报短信订制。</h2>
 {% block nav %}
 <div id="nav">
     <span class="leftBorder"></span>
@@ -92,7 +98,7 @@
 <dl id="about" class="content_wrap">
 <dt>订制说明：</dt>
 
-<dd>1. 免费为中国移动用户提供天气预报短信（通过中国移动飞信），提供两种订制方式。实用灵活。
+<dd>1. 免费为中国移动用户（需要先开通飞信) 提供天气预报短信，支持两种订制方式。实用灵活。
 </dd>
 
 <dd>2. 输入手机号码，接受加为好友的飞信通知即可，提供本站退订或者在好友列表中删除本站飞信用户。</dd>
