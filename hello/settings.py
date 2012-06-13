@@ -10,7 +10,7 @@ STATIC_PATH=os.path.join(HERE, 'medias').replace('\\','/')
 import json
 #json_file =r'F:\cygwin\home\dotcloud\environment.json' if os.sep =='\\' else '/home/dotcloud/environment.json'
 json_file = os.path.abspath(os.path.join(HERE,os.path.pardir,os.path.pardir,'environment.json'))
-print json_file
+#print json_file
 
 with open(json_file) as f:
     env = json.load(f,encoding='utf-8')
