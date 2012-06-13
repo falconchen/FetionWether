@@ -3,10 +3,8 @@ FetionWether
 
 Send Weather Message to user By Fetion
 
-Good Book studying Git :Pro Git
+A Good Book Studying Git :Pro Git
 
 Modify User name in dotcloud
 
-Add tags
-
-使用本地提交
+Experience  at http://tq.sms128.net/ 
