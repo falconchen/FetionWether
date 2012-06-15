@@ -77,7 +77,8 @@ def sendGroupSms(weather):
                 ft.sendBYid(u.fid, message.encode('utf-8'))
                 print u'SMS sent to %s : %s' % (u.phone_num,message)
                 Log(level=2,event = 'Send to %s[%sh]:%s:(%s)' % (u.phone_num,weather.hour,weather.cid.city,message)).save()
-        except Exception:            
+        except Exception,e :            
+            print "except Happen: ",e
             if 'ft' in locals():
                 ft.logout()
 
