@@ -110,10 +110,11 @@ dt{
     line-height: 25px;
     margin: 0;
     text-align:left;
-
+    
 }
-#forecast ul{width:600px;margin:0 auto;}
-.cast {display:inline; float:left;}
+
+#forecast ul{width:600px;margin:0 auto; display:none;}
+.cast {display:inline; float:left; }
 #location {font-weight:bold;color:#336699;}
 #ip_address {    
     float: right;
