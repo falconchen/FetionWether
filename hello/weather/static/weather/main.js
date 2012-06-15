@@ -102,7 +102,7 @@ function get_weather(id) {
       var dataUrl = "http://falcon.sinaapp.com/weather/wt_jsonp.php?id=" + id ;
       jQuery.getJSON(dataUrl+"&callback=?", 
       function(data) {
-          console.log(data);
+          //console.log(data);
           //console.log(get_today_cn() )
           var info = data.weatherinfo;
           //alert(info.city+'（'+info.date_y+'):'+info.weather1+','+info.temp1);
@@ -116,7 +116,7 @@ function get_weather(id) {
           }
         $('#location').html(info.city +':');
         $('#today_cast').html('今天: ' + today_cast +';');
-        $('#tomorrow_cast').html('明天: ' + tomorrow_cast);  
+        $('#tomorrow_cast').html('明天: ' + tomorrow_cast+'.');  
         if (ip !="undefined") {$('#ip_address').html('<b>您的IP:</b> ' + ip.replace(/_/g,''));}
       });
     }

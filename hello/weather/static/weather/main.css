@@ -113,10 +113,11 @@ dt{
 
 }
 #forecast ul{width:600px;margin:0 auto;}
-.cast {display:inline;}
+.cast {display:inline; float:left;}
 #location {font-weight:bold;color:#336699;}
 #ip_address {    
     float: right;
+    display:inline;
     margin-right: 10px;
     color:#369;
      text-decoration: underline;
