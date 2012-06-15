@@ -24,7 +24,7 @@ def msg2all (msg) :
                     break
             except FetionNotYourFriend :
                 add_flag +=1
-                if ft.addfriend(u.phone_num,NAME,'2') == False :
+                if ft.addfriend(u.phone_num,NAME.encode('utf-8'),'2') == False :
                     print u'add friend error: %s' % u.phone_num
                 else :
                     print u'send add Friend msg to %s ' % u.phone_num
