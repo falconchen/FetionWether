@@ -38,7 +38,7 @@ body{
     margin-right: 15px;
     text-decoration: none;
 }
-#nav a:hover {color:#FFFF00}
+#nav a:hover {color:#FFCC00}
 #nav .leftBorder {
     background: url("guide_left.png") no-repeat scroll 0 0 transparent;
     float: left;
@@ -126,3 +126,4 @@ dt{
 #today_cast,#tomorrow_cast { padding-left:5px;}
 
 #nav a.highlight { color:#FFFF00}
+a#get_code:hover {text-decoration:underline;color:#369;}
