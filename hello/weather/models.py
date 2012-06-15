@@ -41,7 +41,7 @@ class Weather(models.Model):
 
 class User(models.Model):
     TYPE_CHOICES = (('E','每日发送三天预报'),('B','可能下雨时才发送')) 
-    fid = models.CharField(verbose_name=u'飞信号',max_length = 9,blank = True,) #飞信id号，允许为空
+    fid = models.CharField(verbose_name=u'飞信号',max_length = 10,blank = True,) #飞信id号，允许为空
     phone_num = models.CharField(max_length = 11)
     wid = models.ForeignKey(Weather,verbose_name=u'订阅城市/发送时间')
     sub_type = models.CharField(verbose_name=u'订阅类型',max_length=1,default='E',choices=TYPE_CHOICES) #订阅类型分别为每天一条短信和只有坏天气时发送短信
@@ -87,7 +87,7 @@ class MyFetion(Fetion):
          
         for i in range(self.limit):
                 try:                    
-                    if super(MyFetion,self).sendBYid(id,message,True) == True:
+                    if super(MyFetion,self).sendBYid(id,message,sm=sm) == True:
                         break
                     else :
                         i+=1
@@ -95,13 +95,14 @@ class MyFetion(Fetion):
                     i+=1
                     Log(event=e.message).save()
                     return False
-                except:
+                except Exception, e:
                     i+=1
                     #err_info = sys.exc_info()
                     #event = '%s : %s ' % (err_info[0],err_info[1])
                     #pritn event
                     #Log(event=event).save()
                     self._login()
+                    
                     
                 finally:
                     pass
