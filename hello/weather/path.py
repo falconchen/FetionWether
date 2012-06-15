@@ -16,7 +16,15 @@ import settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 os.environ['TZ'] = settings.TIME_ZONE
 from weather.models import MyFetion, Log, User,City,Weather 
-f = open(os.path.join(current_dir,'path.txt'),'a')
-f.write('\n'.join(sys.path))
-f.write('\n--------\n')
-f.close()
+
+#f = open(os.path.join(current_dir,'path.txt'),'a')
+#f.write('\n'.join(sys.path))
+#f.write('\n--------\n')
+#f.close()
+PHONE = settings.FETION[0][0]
+PSW = settings.FETION[0][1]
+
+message = u'我想测试你'
+ft = MyFetion(PHONE,PSW)  
+ft.sendBYid(MyFetion.test_id, message.encode('utf-8'))
+ft.logout()
