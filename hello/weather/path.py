@@ -26,5 +26,6 @@ PSW = settings.FETION[0][1]
 
 message = u'我想测试你'
 ft = MyFetion(PHONE,PSW)  
-ft.sendBYid(MyFetion.test_id, message.encode('utf-8'))
+if ft.sendBYid(MyFetion.test_id, message.encode('utf-8')):
+    Log(level=2,event = 'Send test message %s to %s ' % (message,MyFetion.test_id)).save()
 ft.logout()
