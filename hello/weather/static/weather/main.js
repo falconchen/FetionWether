@@ -3,9 +3,22 @@ $(document).ready(
         //生成二级联动列表
         if(document.getElementById('province') != null) {
 	        get_provinces() ;   
+         //不知道为什么会有两个空的 li , 删除它们
+                $('#forecast li').each(
+                    function() {
+                        if ($(this).attr('class') != 'cast') {
+                            $(this).remove()
+                        }
+                    }
+                )
+            
 	        $.getScript('http://61.4.185.48:81/g/');
+                //http://m.weather.com.cn/data/101010100.html
+                
+            
+            
 	         //返回内容如 ： var ip="121.35.167.179";var id=101280601;if(typeof(id_callback)!="undefined"){id_callback();}        
-	        $('input#subtype_1').click(function(){alert('说明:\n预报内容将由发送时间决定\n0~12是为当日下雨的预报;\n13~23为次日下雨的预报。\n没有收到短信表示预报不会下雨\n推荐早上起床或出门前（如7/8点）接收以决定是否带雨具')});
+	        $('input#subtype_1').click(function(){alert('说明:\n预报内容将由发送时间决定\n0~12时是为当日下雨的预报;\n13~23时为次日下雨的预报。\n没有收到短信表示预报不会下雨\n推荐早上起床或出门前（如7/8点）接收以决定是否带雨具')});
 	        
         }
         
@@ -83,13 +96,58 @@ $(document).ready(
 
 );
 
+//加载天气信息脚本，并加信息渲染到当前页
+function get_weather(id) {
+    if("undefined" != typeof id) {
+      var dataUrl = "http://falcon.sinaapp.com/weather/wt_jsonp.php?id=" + id ;
+      jQuery.getJSON(dataUrl+"&callback=?", 
+      function(data) {
+          console.log(data);
+          //console.log(get_today_cn() )
+          var info = data.weatherinfo;
+          //alert(info.city+'（'+info.date_y+'):'+info.weather1+','+info.temp1);
+          //alert(info.city+':'+info.weather1+info.temp1);
+          if (get_today_cn() == info.date_y) {
+                var today_cast=info.weather1 +"&nbsp;" + info.temp1 +"&nbsp;" +info.fx1 +info.fl1 
+                var tomorrow_cast = info.weather2 +"&nbsp;" + info.temp2 
+          }else {
+                var today_cast=info.weather2 +"&nbsp;" + info.temp2 +"&nbsp;" +info.fx2 +info.fl1
+                var tomorrow_cast =  info.weather3 +"&nbsp;" + info.temp3 
+          }
+        $('#location').html(info.city +':');
+        $('#today_cast').html('今天: ' + today_cast +';');
+        $('#tomorrow_cast').html('明天: ' + tomorrow_cast);  
+        if (ip !="undefined") {$('#ip_address').html('<b>您的IP:</b> ' + ip.replace(/_/g,''));}
+      });
+    }
+}
+
+function get_today_cn() {
+  var d = new Date()
+  var vYear = d.getFullYear()
+  var vMon = d.getMonth() + 1
+  var vDay = d.getDate()
+  return vYear +"年" +vMon +"月" +vDay+"日";
+}
+
 function id_callback() {
+
     
     id = get_main_city(id);
+    //调用取天气数据的函数
+    get_weather(id);
+    
+   // $.getScript('http://61.4.185.48:81/g/' ) {
+    
+    //}
+         
+                
+    
     //根据该id取省份/城市下拉列表的值
     var area = get_area_obj(id);       
     //console.log(area);
     //var area = {'p':'广东','c':'深圳'};
+    
     
     var obj = document.getElementById('province');
     if (obj == null) return ;
