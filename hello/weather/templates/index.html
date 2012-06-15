@@ -23,10 +23,10 @@
 {% block nav %}
 <div id="nav">
     <span class="leftBorder"></span>
-    <a href="/">我要订制</a>
-	<a href="/weather/verify/update/">更改订阅</a>
-	<a href="/weather/verify/deactive/">退订</a>
-	<a href="/weather/verify/active/">重新激活</a>	
+    <a  id="insert" href="/">我要订制</a>
+	<a id="update" href="/weather/verify/update/">更改订阅</a>
+	<a id="deactive" href="/weather/verify/deactive/">退订</a>
+	<a id="active" href="/weather/verify/active/">重新激活</a>	
 <a href="https://github.com/falconchen/FetionWether" target="_blank">项目地址  </a>
     <span class="rightBorder"></span>
 </div>
@@ -89,7 +89,9 @@
 	</dl>
 	{% csrf_token %}
 	<input class="submit" type="submit" value="确定">
-	
+{% if action %}
+	<input type="hidden" name="action"  value="{{ action }}">
+{% endif %}
 	</form>	
 </div>
 {% endifnotequal %}

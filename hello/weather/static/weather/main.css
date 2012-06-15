@@ -124,3 +124,5 @@ dt{
      text-decoration: underline;
 }
 #today_cast,#tomorrow_cast { padding-left:5px;}
+
+#nav a.highlight { color:#FFCC00}

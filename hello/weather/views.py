@@ -91,6 +91,7 @@ def verify(request, action):
     return render_to_response('verify.html', {'form':form, 'title':title, 'msg':msg, 'form_id':'verify', 'action':action}, context_instance=RequestContext(request))
 
 def update(request):
+    action = 'update'
     #title = '更新'
     try :                
         phone_num = request.session['update_phone_num']
@@ -132,7 +133,7 @@ def update(request):
         else:
             default_hour = int(strftime('%H')) + 1
             form = UpdateSubForm(initial={'hour':default_hour, 'sub_type':'E'}) #定义字段的option默认值
-        return render_to_response('index.html', {'form':form, 'msg':msg, 'form_id':'subscribe'}, context_instance=RequestContext(request))
+        return render_to_response('index.html', {'form':form, 'msg':msg, 'action':action,'form_id':'subscribe'}, context_instance=RequestContext(request))
     except Exception:
         #print Exception
         raise Http404('非法请求')

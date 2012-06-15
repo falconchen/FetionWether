@@ -8,6 +8,17 @@ $(document).ready(
                 }
             }
         );
+
+        //高亮当前action
+        var action = $('input[name=action]').val() ;
+        if  (action == undefined) {
+            $('a#insert').addClass('highlight');
+        }else {
+            $('a#'+action).addClass('highlight')
+        }
+
+
+
          $.getScript('http://61.4.185.48:81/g/');
 
         //生成二级联动列表
