@@ -169,4 +169,4 @@ if __name__ == '__main__':
     main()    
     stop = time.time()
     msg = "Threads time Elapsed :%s \n" % (stop-start)
-    Log(level=3,event = msg ).save()
+    Log(level=1,event = msg ).save()
