@@ -38,7 +38,7 @@ def index(request):
             #用户与天气订阅表关联，仅使用新增            
             user = User(fid=fid, phone_num=cd['phone_num'], wid=weather, sub_type=cd['sub_type'], active=True)
             user.save()            
-            msg = '你的手机（%s）将收到一条名为 “%s”的好友请求 短信,请回复Y后完成免费订阅！' % (str(cd['phone_num']), NICK)            
+            msg = '你的手机（%s）将收到一条名为 “%s”的好友请求 短信,请回复Y后完成免费订阅！(请在24小时内确认，过期请重新注册)' % (str(cd['phone_num']), NICK)            
             form = None
     
     else:    
@@ -229,7 +229,7 @@ def get_code(request):
         request.session['phone_num'] = phone_num
         request.session['code'] = code
         request.session.set_expiry(300)                        
-        msg = '验证码已发送到你的手机，请在5分钟内输入，不区分大小写。' 
+        msg = '验证码已发送到你的手机，请在5分钟内输入，不区分大小写。--飞信天气网:http://tq.sms128.net' 
     else :
         msg = 'something wrong,retry please'
         
