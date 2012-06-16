@@ -161,7 +161,7 @@ def main():
     for i in range(len(weathers)):
         info_threads[i].join()
         
-    print "Finish fetching data into db" #实际上不插入数据库也是没事的
+    print "Finish fetching data into db" 
         
 if __name__ == '__main__':
     start = time.time()
