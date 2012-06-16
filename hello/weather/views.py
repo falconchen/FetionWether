@@ -229,7 +229,7 @@ def get_code(request):
         request.session['phone_num'] = phone_num
         request.session['code'] = code
         request.session.set_expiry(300)                        
-        msg = '验证码已发送到你的手机，请在5分钟内输入，不区分大小写。--飞信天气网:http://tq.sms128.net' 
+        msg = '验证码已发送到你的手机，请在5分钟内输入，不区分大小写。\n[飞信天气网:http://tq.sms128.net]' 
     else :
         msg = 'something wrong,retry please'
         
