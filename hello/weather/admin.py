@@ -10,7 +10,7 @@ class CityAdmin(admin.ModelAdmin):
     search_fields = ('province','city','cid')
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('phone_num','fid','reg_ts','sub_type','active','wid',)
+    list_display = ('phone_num','fid','reg_ts','sub_type','active','wid','send_time')
     list_filter = ('reg_ts','active')
     search_fields = ('phone_num',)
     date_hierarchy = 'reg_ts'

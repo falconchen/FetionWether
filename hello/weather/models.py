@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # coding:utf-8
-
+import datetime
 from django.db import models
 #from django.contrib import admin
 from PyWapFetion import Fetion,Errors
@@ -45,8 +45,10 @@ class User(models.Model):
     phone_num = models.CharField(max_length = 11)
     wid = models.ForeignKey(Weather,verbose_name=u'订阅城市/发送时间')
     sub_type = models.CharField(verbose_name=u'订阅类型',max_length=1,default='E',choices=TYPE_CHOICES) #订阅类型分别为每天一条短信和只有坏天气时发送短信
-    reg_ts = models.DateTimeField(verbose_name=u'注册/更改时间',auto_now=True)
+    reg_ts = models.DateTimeField(verbose_name=u'注册时间',default=datetime.datetime.now)
     active = models.BooleanField(default=True,verbose_name="是否激活")
+    send_time = models.DateTimeField(default=datetime.datetime(1970,1,1,0,0,0),verbose_name=u'上次发送时间')
+    
     
     def __unicode__(self):
         return self.phone_num

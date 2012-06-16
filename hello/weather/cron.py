@@ -33,24 +33,27 @@ class InfoThread(threading.Thread):
         apply(self.func,self.args)
 
 def into_db(weather):
-    limit = 5
-    base_url = 'http://m.weather.com.cn/data/%s.html'
-    url = base_url % weather.cid.cid
-    
-    for i in range(limit):
-        try:
-            info = urllib2.urlopen(url).read()
-            if bool(json.loads(info)): 
-                break 
-        except:
-            info = '获取失败'
-        finally:
-            i+=1
-            
-    weather.info = info
-    
-    weather.save()
-    #print u'%s : %s\n' % (weather.cid.city,url)
+    if weather.fetch_ts < _current_clock_dt():
+        #仅当当前数据过期才获取
+        limit = 5
+        base_url = 'http://m.weather.com.cn/data/%s.html'
+        url = base_url % weather.cid.cid
+        
+        for i in range(limit):
+            try:
+                info = urllib2.urlopen(url).read()
+                if bool(json.loads(info)): 
+                    break 
+            except:
+                info = '获取失败'
+            finally:
+                i+=1
+        else:
+             Log(level=1,event="failed to fetch weather info %s" % url).save()
+                
+        weather.info = info        
+        weather.save()
+        
     
     sendGroupSms(weather)
     
@@ -58,7 +61,8 @@ def into_db(weather):
 
 #发飞信
 def sendGroupSms(weather):
-    users = weather.user_set.filter(active=True)
+    clock_dt = _current_clock_dt()
+    users = weather.user_set.filter(active=True,send_time__lt=clock_dt)
     
     if len(users)>0 :
         try:
@@ -76,6 +80,8 @@ def sendGroupSms(weather):
                                
                 if ft.sendBYid(u.fid, message.encode('utf-8')):
                 #print u'SMS sent to %s : %s' % (u.phone_num,message)
+                    u.send_time = datetime.now()
+                    u.save()
                     Log(level=2,event = 'Send to %s[%sh]:%s:(%s)' % (u.phone_num,weather.hour,weather.cid.city,message)).save()
         except Exception,e :            
             print "except Happen: ",e
@@ -129,6 +135,13 @@ def parse_json(jdata,user):
     return template
     
     
+def _current_clock_dt():
+    now = datetime.now()
+    clock_tuple = (now.year, now.month, now.day, now.hour, 0, 0)
+    clock_dt = datetime(*clock_tuple)
+    return clock_dt
+    
+
 
 
 def main():
