@@ -101,8 +101,9 @@ class MyFetion(Fetion):
                         not_friend = User.objects.get(fid=id)
                     except User.DoesNotExist:
                         pass
-                    else:                                                
-                        if datetime.datetime.now() - not_friend.reg_ts > 0:
+                    else:  
+                        delta = datetime.datetime.now() - not_friend.reg_ts                                              
+                        if  delta.days > 0:
                             not_friend.delete()
                             Log(level=1,event='delete not friend fid:%s ' % id).save()
                                                 
