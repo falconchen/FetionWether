@@ -30,7 +30,7 @@ body{
 #nav { background: url("guide_mid.png") repeat-x scroll 0 0 transparent; font-size: 12px; height: 24px;clear:both; }
 #nav a {
     
-    color:#F7FFD4;
+    color:#FFF;
     float: left;
     font-size: 12px;
     font-weight: bold;
