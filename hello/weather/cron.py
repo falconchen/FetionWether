@@ -77,12 +77,13 @@ def sendGroupSms(weather):
                 
                 if message == None :
                     continue
-                               
-                if ft.sendBYid(u.fid, message.encode('utf-8')):
-                #print u'SMS sent to %s : %s' % (u.phone_num,message)
+                send_result = ft.sendBYid(u.fid, message.encode('utf-8'))
+                #返回none表示非好友,对非好友不重复发送                 
+                if send_result == True or send_result == None:
+                    did = "Did" if send_result == True else "Didn't"
                     u.send_time = datetime.now()
-                    u.save()
-                    Log(level=2,event = 'Send to %s[%sh]:%s:(%s)' % (u.phone_num,weather.hour,weather.cid.city,message)).save()
+                    u.save()                    
+                    Log(level=2,event = '%s Send to %s[%sh]:%s:(%s)' % (did,u.phone_num,weather.hour,weather.cid.city,message)).save()
         except Exception,e :            
             print "except Happen: ",e
             if 'ft' in locals():

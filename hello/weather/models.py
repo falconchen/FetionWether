@@ -96,7 +96,7 @@ class MyFetion(Fetion):
                 except Errors.FetionNotYourFriend, e:
                     i+=1
                     Log(level=1,event='fid:%s is not your Frind' % id).save()
-                    return False
+                    return None
                 except Exception, e:
                     i+=1
                     #err_info = sys.exc_info()
