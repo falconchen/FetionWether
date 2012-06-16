@@ -20,6 +20,7 @@ from weather.models import MyFetion, Log, User,City,Weather
 
 PHONE = settings.FETION[0][0]
 PSW = settings.FETION[0][1]
+send_count = 0 #是否发送过消息
 
 class InfoThread(threading.Thread):
     
@@ -78,8 +79,12 @@ def sendGroupSms(weather):
                 if message == None :
                     continue
                 send_result = ft.sendBYid(u.fid, message.encode('utf-8'))
+                if send_result == True :  #发送计数
+                    global send_count
+                    send_count += 1
                 #返回none表示非好友,对非好友不重复发送                 
                 if send_result == True or send_result == None:
+
                     did = "Did" if send_result == True else "Didn't"
                     u.send_time = datetime.now()
                     u.save()                    
@@ -167,6 +172,7 @@ def main():
 if __name__ == '__main__':
     start = time.time()
     main()    
-    stop = time.time()
-    msg = "Threads time Elapsed :%s \n" % (stop-start)
-    Log(level=1,event = msg ).save()
+    stop = time.time()    
+    if send_count > 0 :
+        msg = "Send sms count: %s , Threads time Elapsed :%s \n" % (send_count, stop-start) 
+        Log(level=1,event = msg ).save()
