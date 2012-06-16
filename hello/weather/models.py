@@ -95,7 +95,18 @@ class MyFetion(Fetion):
                         i+=1
                 except Errors.FetionNotYourFriend, e:
                     i+=1
-                    Log(level=1,event='fid:%s is not your Frind' % id).save()
+                    #如果在一天内不确认好友关系，则删除用户的注册关系
+                    #这样会导致过期后用户确认加好友，也会无效。需要重新注册
+                    try:
+                        not_friend = User.objects.get(fid=id)
+                    except User.DoesNotExist:
+                        pass
+                    else:                                                
+                        if datetime.datetime.now() - not_friend.reg_ts > 0:
+                            not_friend.delete()
+                            Log(level=1,event='delete not friend fid:%s ' % id).save()
+                                                
+                    Log(level=1,event='fid:%s is not your Friend' % id).save()
                     return None
                 except Exception, e:
                     i+=1
