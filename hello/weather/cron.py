@@ -33,7 +33,7 @@ class InfoThread(threading.Thread):
         apply(self.func,self.args)
 
 def into_db(weather):
-    if weather.fetch_ts < _current_clock_dt() or weather.info==None:
+    if weather.fetch_ts < _current_clock_dt() or weather.info=='':
         #仅当当前数据过期才获取
         limit = 5
         base_url = 'http://m.weather.com.cn/data/%s.html'
