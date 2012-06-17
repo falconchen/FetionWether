@@ -3,7 +3,7 @@
 
 from django.contrib import admin
 from weather.models import City,User,Weather,Log
-#����Ϊ��̨����ģ������
+
 
 class CityAdmin(admin.ModelAdmin):
     list_display = ('cid','province','city')
@@ -12,7 +12,7 @@ class CityAdmin(admin.ModelAdmin):
 class UserAdmin(admin.ModelAdmin):
     list_display = ('phone_num','fid','reg_ts','sub_type','active','wid','send_time')
     list_filter = ('reg_ts','active')
-    search_fields = ('phone_num',)
+    search_fields = ('phone_num','fid',)
     date_hierarchy = 'reg_ts'
 
     
