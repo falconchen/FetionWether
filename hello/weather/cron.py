@@ -100,7 +100,7 @@ def parse_json(jdata,user):
     except:
         return False    
     winfo = info['weatherinfo']
-    tail = u' (本消息由飞信天气网 http://tq.sms128.net 免费提供)'
+    tail = u' ----飞信天气网: http://tq.sms128.net '
     weekday_cn = (u'星期一',u'星期二',u'星期三',u'星期四',u'星期五',u'星期六',u'星期日')
     ch_weekday = lambda day: weekday_cn[day.weekday()]
     ch_date = lambda day: u'%s年%s月%s日' % (day.year,day.month,day.day)
