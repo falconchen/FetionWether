@@ -104,7 +104,7 @@ class MyFetion(Fetion):
                     else:  
                         delta = datetime.datetime.now() - not_friend.reg_ts                                              
                         if  delta.days > 0:                            
-                            res = "Success" if not_friend.delete() else "Failed"
+                            res = "Success" if not_friend.delete() == None else "Failed" 
                             Log(level=1,event='%s to delete not friend :%s ' % (res ,not_friend.phone_num)).save()
                                                 
                     Log(level=1,event='fid:%s is not your Friend' % id).save()
