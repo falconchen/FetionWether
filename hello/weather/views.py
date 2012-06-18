@@ -83,8 +83,8 @@ def verify(request, action):
                 if change_status(s_phone_num, action) :
                     del request.session['phone_num']
                     del request.session['code']
-                    request.session['announce'] = '%s成功' % title
-                    Log(level=2,event='%s:%s' % (s_phone_num,request.session['announce'])).save()
+                    request.session['announce'] = u'%s成功' % title
+                    Log(level=2,event=u'%s:%s' % (s_phone_num,request.session['announce'])).save()
                     if action == 'active':
                         request.session['user'] = User.objects.get(phone_num=phone_num)
                     return HttpResponseRedirect('/weather/announce/')
@@ -126,8 +126,8 @@ def update(request):
                 u.sub_type = cd['sub_type']
                 u.save()
                 
-                request.session['announce'] = '更改成功 '
-                Log(level=2,event='%s:%s' % (phone_num,request.session['announce'])).save()
+                request.session['announce'] = u'更改成功'
+                Log(level=2,event=u'%s:%s' % (u.phone_num,request.session['announce'])).save()
                 request.session['user'] = u
                 #if not settings.DEBUG:   
                 del request.session['update_phone_num']        
@@ -140,9 +140,10 @@ def update(request):
             default_hour = int(strftime('%H')) + 1
             form = UpdateSubForm(initial={'hour':default_hour, 'sub_type':'E'}) #定义字段的option默认值
         return render_to_response('index.html', {'form':form, 'msg':msg, 'action':action,'form_id':'subscribe'}, context_instance=RequestContext(request))
-    except Exception:
+    except Exception, e:
         #print Exception
-        raise Http404('非法请求')
+        raise e
+        #raise Http404('非法请求')
 #    
 #    
 
@@ -219,7 +220,7 @@ def get_code(request):
         phone_num = form.cleaned_data.get('phone_num')    
         fid = form.fid
     import random
-    chars = '0123456789'.upper() * 10
+    chars = 'abcdefghjklmnopqrstuvwxyz123456789'.upper() * 5
     code = ''.join(random.sample(chars, 6))
     t = loader.get_template('sms.html')
     sms = t.render(Context({'code': code}))

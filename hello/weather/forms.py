@@ -93,7 +93,7 @@ class CodeForm(forms.Form):
     def clean_phone_num(self):
             
         phone_num = self.cleaned_data['phone_num']
-        Log(level=2,event='%s asked for verify code' % phone_num).save()        
+        Log(level=2,event='%s required for verify code' % phone_num).save()        
         #self.phone_num = phone_num
         try:            
             user = User.objects.get(phone_num=phone_num)
