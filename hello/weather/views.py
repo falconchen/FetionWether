@@ -83,8 +83,8 @@ def verify(request, action):
                 if change_status(s_phone_num, action) :
                     del request.session['phone_num']
                     del request.session['code']
-                    request.session['announce'] = u'%s成功' % title
-                    Log(level=2,event=u'%s:%s' % (s_phone_num,request.session['announce'])).save()
+                    request.session['announce'] = '%s成功' % title
+                    Log(level=2,event='%s:%s' % (s_phone_num,action)).save()
                     if action == 'active':
                         request.session['user'] = User.objects.get(phone_num=phone_num)
                     return HttpResponseRedirect('/weather/announce/')
@@ -236,7 +236,7 @@ def get_code(request):
         request.session['phone_num'] = phone_num
         request.session['code'] = code
         request.session.set_expiry(300)                        
-        msg = '验证码已发送到你的手机，请在5分钟内输入，不区分大小写。\n[飞信天气网:http://tq.sms128.net]' 
+        msg = '验证码已发送到你的手机，请在5分钟内输入，不区分大小写。\n如果30秒内没有收到，请点击重新获取\n[飞信天气网:http://tq.sms128.net]' 
     else :
         msg = 'something wrong,retry please'
         
