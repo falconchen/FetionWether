@@ -17,7 +17,7 @@ NICK = settings.FETION[0][2].encode('utf-8')
 def index(request):
     msg = '请先填写手机号码和订阅信息, 天气短信将发送到你的手机。'
     if request.method == 'POST':
-        form = SubscribeForm(request.POST)
+        form = SubscribeForm(request.POST)            
         if form.is_valid():
             fid = form.fid
             cd = form.cleaned_data
@@ -33,7 +33,11 @@ def index(request):
             
             #发送加为好友的短信
             ft = MyFetion(PHONE,PSW)
-            ft.addfriend(cd['phone_num'], NICK, '2')
+            add_res = ft.addfriend(cd['phone_num'], NICK, '2')
+            if add_res:
+                Log(event=3,event='success to send adding friend sms:%s' % cd['phone_num'])
+            else:
+                Log(event=1,event='failed send adding friend sms:%s' % cd['phone_num'])
 
             #用户与天气订阅表关联，仅使用新增            
             user = User(fid=fid, phone_num=cd['phone_num'], wid=weather, sub_type=cd['sub_type'], active=True)
@@ -80,6 +84,7 @@ def verify(request, action):
                     del request.session['phone_num']
                     del request.session['code']
                     request.session['announce'] = '%s成功' % title
+                    Log(level=3,event='%s:%s' % (s_phone_num,request.session['announce']))
                     if action == 'active':
                         request.session['user'] = User.objects.get(phone_num=phone_num)
                     return HttpResponseRedirect('/weather/announce/')
@@ -122,6 +127,7 @@ def update(request):
                 u.save()
                 
                 request.session['announce'] = '更改成功 '
+                Log(level=3,event='%s:%s' % (phone_num,request.session['announce']))
                 request.session['user'] = u
                 #if not settings.DEBUG:   
                 del request.session['update_phone_num']        
@@ -214,7 +220,7 @@ def get_code(request):
         fid = form.fid
     import random
     chars = 'zyxwvutsrqpnmlkjihgfedcba123456789'.upper() * 10
-    code = ''.join(random.sample(chars, 4))
+    code = ''.join(random.sample(chars, 6))
     t = loader.get_template('sms.html')
     sms = t.render(Context({'code': code}))
     

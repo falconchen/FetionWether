@@ -75,7 +75,7 @@ $(document).ready(
 	        	}
 				
 				var code = $('#code').val();
-				var reg = /^[A-Za-z0-9]{4}$/;
+				var reg = /^[A-Za-z0-9]{6}$/;
         		if (reg.exec(code) == null){
 	        		alert('无效验证码');
 	        		return false;

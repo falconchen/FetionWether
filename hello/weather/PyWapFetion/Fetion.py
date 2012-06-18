@@ -10,6 +10,7 @@ try:from cStringIO import StringIO
 except:from StringIO import StringIO
 
 idfinder = compile('touserid=(\d*)')
+idfinder2 = compile('<postfield name="number" value="(\d+)')
 userstatus = compile('<a href="/im/user/userinfoByuserid.action\?touserid=\d*&amp;.*?">.*?</a>\[(.*?)\]')
 infofinder = compile('<dd>(.*?)</dd>')
 avatarfinder = compile('<div class="mybox_info_pic"><a href="#"><img src="(.*?)"')
@@ -70,9 +71,17 @@ class Fetion(object):
         return False if id is None else '成功' in htm
 
     def _getid(self,mobile):
-        try: return idfinder.findall(self.open('im/index/searchOtherInfoList.action',{'searchText':mobile}))[0]
-        except: return None
-        
+        html = self.open('im/index/searchOtherInfoList.action',{'searchText':mobile})
+        print html
+        try: return idfinder.findall(html)[0]
+        except IndexError:
+            try:
+                return idfinder2.findall(html)[0]
+            except:
+                return None
+        except:
+            return None
+            
     def findid(self,mobile):
         if hasattr(self,'cache') and self.cache is not None:
             id = self.cache[mobile]

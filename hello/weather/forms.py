@@ -1,7 +1,7 @@
 #coding:utf-8
 from django import forms
 from settings import FETION
-from weather.models import Weather, User, City
+from weather.models import Weather, User, City, MyFetion
 from weather.PyWapFetion import Fetion
 from  django.core.exceptions import ValidationError
 import re
@@ -43,8 +43,9 @@ class SubscribeForm(forms.Form):
     phone_num = forms.CharField(label='手机号码', min_length=11, max_length=11, widget=forms.TextInput(attrs={'id':'phone_num'}))
     
     def clean_phone_num(self):
-                
+        
         phone_num = self.cleaned_data['phone_num']
+        Log(event=3,event='%s tried to subscribe' % phone_num)        
         #self.phone_num = phone_num
         china_mobile_num = ('134','135','136','137','138','139','150','151','152','158','159','157','187','188','147')
         if phone_num[0:3] not in china_mobile_num:
@@ -62,7 +63,7 @@ class SubscribeForm(forms.Form):
         #这里的管理员手机可能使用模型存取
         phone = FETION[0][0]
         psw = FETION[0][1]
-        ft = Fetion(phone, psw)
+        ft = MyFetion(phone, psw)
         fid = ft.findid(phone_num)
         ft.logout()
         if fid == None:
@@ -92,6 +93,7 @@ class CodeForm(forms.Form):
     def clean_phone_num(self):
             
         phone_num = self.cleaned_data['phone_num']
+        Log(event=3,event='%s asked for verify code' % phone_num)        
         #self.phone_num = phone_num
         try:            
             user = User.objects.get(phone_num=phone_num)
