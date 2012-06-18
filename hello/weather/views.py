@@ -3,7 +3,7 @@ from time import strftime
 from django.template import loader, Context
 from django.shortcuts import render_to_response,get_object_or_404
 from django.http import HttpResponse, Http404, HttpResponseRedirect
-from weather.models import City, Weather, User,MyFetion
+from weather.models import City, Weather, User,MyFetion, Log
 from django.template import RequestContext
 import urllib2, re
 from weather.forms import SubscribeForm, VerifyForm, CodeForm, UpdateSubForm
