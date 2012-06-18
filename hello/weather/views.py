@@ -35,14 +35,14 @@ def index(request):
             ft = MyFetion(PHONE,PSW)
             add_res = ft.addfriend(cd['phone_num'], NICK, '2')
             if add_res:
-                Log(level=3,event='success to send adding friend sms:%s' % cd['phone_num'])
+                Log(level=2,event='success to send adding friend sms to %s' % cd['phone_num']).save()
             else:
-                Log(level=1,event='failed send adding friend sms:%s' % cd['phone_num'])
+                Log(level=1,event='failed to send adding friend sms to %s ,maybe he/she has been your friend.' % cd['phone_num']).save()
 
             #用户与天气订阅表关联，仅使用新增            
             user = User(fid=fid, phone_num=cd['phone_num'], wid=weather, sub_type=cd['sub_type'], active=True)
             user.save()            
-            msg = '你将收到一条名为"%s"的好友请求 短信,请于24小时内确认,逾期无效' %  NICK
+            msg = '你将收到一条"%s"的好友请求短信,请于24小时内确认,逾期无效' %  NICK
             form = None
     
     else:    
@@ -84,7 +84,7 @@ def verify(request, action):
                     del request.session['phone_num']
                     del request.session['code']
                     request.session['announce'] = '%s成功' % title
-                    Log(level=3,event='%s:%s' % (s_phone_num,request.session['announce']))
+                    Log(level=2,event='%s:%s' % (s_phone_num,request.session['announce'])).save()
                     if action == 'active':
                         request.session['user'] = User.objects.get(phone_num=phone_num)
                     return HttpResponseRedirect('/weather/announce/')
@@ -127,7 +127,7 @@ def update(request):
                 u.save()
                 
                 request.session['announce'] = '更改成功 '
-                Log(level=3,event='%s:%s' % (phone_num,request.session['announce']))
+                Log(level=2,event='%s:%s' % (phone_num,request.session['announce'])).save()
                 request.session['user'] = u
                 #if not settings.DEBUG:   
                 del request.session['update_phone_num']        

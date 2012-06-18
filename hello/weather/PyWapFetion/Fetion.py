@@ -10,7 +10,7 @@ try:from cStringIO import StringIO
 except:from StringIO import StringIO
 
 idfinder = compile('touserid=(\d*)')
-idfinder2 = compile('<postfield name="number" value="(\d+)')
+idfinder2 = compile('name="internalid" value="(\d+)"')
 userstatus = compile('<a href="/im/user/userinfoByuserid.action\?touserid=\d*&amp;.*?">.*?</a>\[(.*?)\]')
 infofinder = compile('<dd>(.*?)</dd>')
 avatarfinder = compile('<div class="mybox_info_pic"><a href="#"><img src="(.*?)"')
