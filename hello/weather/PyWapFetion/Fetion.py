@@ -72,7 +72,6 @@ class Fetion(object):
 
     def _getid(self,mobile):
         html = self.open('im/index/searchOtherInfoList.action',{'searchText':mobile})
-        print html
         try: return idfinder.findall(html)[0]
         except IndexError:
             try:

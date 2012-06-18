@@ -79,7 +79,7 @@ class SubscribeForm(forms.Form):
 class VerifyForm(forms.Form):
        
     phone_num = forms.CharField(label='手机号码', min_length=11, max_length=11, widget=forms.TextInput(attrs={'id':'phone_num'}))
-    code = forms.CharField(label='验证码', min_length=4, max_length=4, widget=forms.TextInput(attrs={'id':'code'}))     
+    code = forms.CharField(label='验证码', min_length=6, max_length=6, widget=forms.TextInput(attrs={'id':'code'}))     
     #phone_num =  SubscribeForm.phone_num
     #def clean_phone_num(self):
         

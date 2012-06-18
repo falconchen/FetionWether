@@ -219,7 +219,7 @@ def get_code(request):
         phone_num = form.cleaned_data.get('phone_num')    
         fid = form.fid
     import random
-    chars = 'zyxwvutsrqpnmlkjihgfedcba123456789'.upper() * 10
+    chars = '0123456789'.upper() * 10
     code = ''.join(random.sample(chars, 6))
     t = loader.get_template('sms.html')
     sms = t.render(Context({'code': code}))
