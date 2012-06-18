@@ -35,9 +35,9 @@ def index(request):
             ft = MyFetion(PHONE,PSW)
             add_res = ft.addfriend(cd['phone_num'], NICK, '2')
             if add_res:
-                Log(event=3,event='success to send adding friend sms:%s' % cd['phone_num'])
+                Log(level=3,event='success to send adding friend sms:%s' % cd['phone_num'])
             else:
-                Log(event=1,event='failed send adding friend sms:%s' % cd['phone_num'])
+                Log(level=1,event='failed send adding friend sms:%s' % cd['phone_num'])
 
             #用户与天气订阅表关联，仅使用新增            
             user = User(fid=fid, phone_num=cd['phone_num'], wid=weather, sub_type=cd['sub_type'], active=True)
