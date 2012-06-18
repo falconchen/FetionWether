@@ -1,7 +1,7 @@
 #coding:utf-8
 from django import forms
 from settings import FETION
-from weather.models import Weather, User, City, MyFetion
+from weather.models import Weather, User, City, MyFetion, Log
 from weather.PyWapFetion import Fetion
 from  django.core.exceptions import ValidationError
 import re
