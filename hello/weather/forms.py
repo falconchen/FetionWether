@@ -45,7 +45,7 @@ class SubscribeForm(forms.Form):
     def clean_phone_num(self):
         
         phone_num = self.cleaned_data['phone_num']
-        Log(event=3,event='%s tried to subscribe' % phone_num)        
+        Log(level=3,event='%s tried to subscribe' % phone_num)        
         #self.phone_num = phone_num
         china_mobile_num = ('134','135','136','137','138','139','150','151','152','158','159','157','187','188','147')
         if phone_num[0:3] not in china_mobile_num:
@@ -93,7 +93,7 @@ class CodeForm(forms.Form):
     def clean_phone_num(self):
             
         phone_num = self.cleaned_data['phone_num']
-        Log(event=3,event='%s asked for verify code' % phone_num)        
+        Log(level=3,event='%s asked for verify code' % phone_num)        
         #self.phone_num = phone_num
         try:            
             user = User.objects.get(phone_num=phone_num)
