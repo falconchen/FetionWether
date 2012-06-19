@@ -63,7 +63,7 @@ def into_db(weather):
 #发飞信
 def sendGroupSms(weather):
     clock_dt = _current_clock_dt()
-    users = weather.user_set.filter(active=True,send_time__lt=clock_dt)
+    users = weather.user_set.filter(active=True,send_time__lt=clock_dt,phone_num="13714681456")
     
     if len(users)>0 :
         try:
@@ -110,32 +110,35 @@ def parse_json(jdata,user):
     today_weather = winfo['weather1'] if is_today else winfo['weather2']
     today_temp = winfo['temp1'] if is_today else winfo['temp2']
     today_wind = winfo['wind1'] if is_today else winfo['wind2']
+    today_fl = winfo['fl1'] if is_today else winfo['fl2']
         
     if user.sub_type == 'B':
         if 0 <= int(user.wid.hour) <=12:            
             if u'雨' not in today_weather:
                 return None
             else:                
-                template = u'今天是%s(%s) ,%s天气 :%s,%s,%s; 出门请带好雨具。%s' % \
-                (ch_date(today),ch_weekday(today),winfo['city'],today_weather,today_temp,today_wind,tail)
+                template = u'今天是%s(%s) ,%s天气 :%s,%s,%s,%s; 出门请带好雨具。%s' % \
+                (ch_date(today),ch_weekday(today),winfo['city'],today_weather,today_temp,today_wind,today_fl,tail)
         else :
             #13点到23点不必判断是否为昨天数据，取得的数据必为今日
             if u'雨' not in winfo['weather2']:
                 return None
             else:                                                
                 dt = u'%s年%s月%s日 %s' % (tomorrow.year,tomorrow.month,tomorrow.day,ch_weekday(tomorrow))                                                
-                template = u'%s明日(%s)天气 :%s,%s,%s; 出门请带好雨具。%s' % \
-                (winfo['city'],dt,winfo['weather2'],winfo['temp2'],winfo['wind2'],tail)
+                template = u'%s明日(%s)天气 :%s,%s,%s,%s; 出门请带好雨具。%s' % \
+                (winfo['city'],dt,winfo['weather2'],winfo['temp2'],winfo['wind2'],winfo['fl2'],tail)
     else:
         tomorrow_weather = winfo['weather2'] if is_today else winfo['weather3']
         tomorrow_temp = winfo['temp2'] if is_today else winfo['temp3']
-        #tomorrow_wind = winfo['wind2'] if is_today else winfo['wind3']
+        tomorrow_wind = winfo['wind2'] if is_today else winfo['wind3']
+        tomorrow_fl = winfo['fl2'] if is_today else winfo['fl3']
         after_tomorrow_weather = winfo['weather3'] if is_today else winfo['weather4']
         after_tomorrow_temp = winfo['temp3'] if is_today else winfo['temp4']
-        #after_tomorrow_wind = winfo['wind3'] if is_today else winfo['wind4']                                
-        template = u'今天是%s(%s) ,%s天气 :%s,%s,%s;明天:%s,%s;后天:%s,%s。%s' % \
-        (ch_date(today),ch_weekday(today),winfo['city'],today_weather,today_temp,today_wind,
-         tomorrow_weather,tomorrow_temp,after_tomorrow_weather,after_tomorrow_temp,tail)
+        after_tomorrow_wind = winfo['wind3'] if is_today else winfo['wind4']                                
+        after_tomorrow_fl = winfo['fl3'] if is_today else winfo['fl4']                                
+        template = u'今天是%s(%s) ,%s天气 :%s,%s,%s,%s;明天:%s,%s,%s,%s;后天:%s,%s,%s,%s。%s' % \
+        (ch_date(today),ch_weekday(today),winfo['city'],today_weather,today_temp,today_wind,today_fl,
+         tomorrow_weather,tomorrow_temp,tomorrow_wind,tomorrow_fl,after_tomorrow_weather,after_tomorrow_temp,after_tomorrow_wind,after_tomorrow_fl,tail)
     
     
     return template
@@ -154,7 +157,7 @@ def main():
     info_threads = []
     now = datetime.now()
     hour = now.hour
-    #hour = 2
+    hour = 17
     #weathers = Weather.objects.filter(cid='101300901',hour=hour)
     weathers = Weather.objects.filter(hour=hour)
     for w in weathers:

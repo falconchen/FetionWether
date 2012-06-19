@@ -142,8 +142,8 @@ def update(request):
         return render_to_response('index.html', {'form':form, 'msg':msg, 'action':action,'form_id':'subscribe'}, context_instance=RequestContext(request))
     except Exception, e:
         #print Exception
-        raise e
-        #raise Http404('非法请求')
+        #raise e
+        raise Http404('非法请求')
 #    
 #    
 
