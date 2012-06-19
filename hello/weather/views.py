@@ -42,7 +42,11 @@ def index(request):
             #用户与天气订阅表关联，仅使用新增            
             user = User(fid=fid, phone_num=cd['phone_num'], wid=weather, sub_type=cd['sub_type'], active=True)
             user.save()            
-            msg = '你将收到一条"%s"的好友请求短信,请于24小时内确认,逾期无效' %  NICK
+            
+            if add_res:
+                msg = '你将收到一条"%s"的好友请求短信,请于24小时内确认,逾期无效' %  NICK
+            else:
+                msg = '订制成功'
             form = None
     
     else:    
