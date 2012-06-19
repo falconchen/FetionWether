@@ -63,7 +63,7 @@ def into_db(weather):
 #发飞信
 def sendGroupSms(weather):
     clock_dt = _current_clock_dt()
-    users = weather.user_set.filter(active=True,send_time__lt=clock_dt,phone_num="13714681456")
+    users = weather.user_set.filter(active=True,send_time__lt=clock_dt)
     
     if len(users)>0 :
         try:
@@ -157,7 +157,7 @@ def main():
     info_threads = []
     now = datetime.now()
     hour = now.hour
-    hour = 17
+    #hour = 17
     #weathers = Weather.objects.filter(cid='101300901',hour=hour)
     weathers = Weather.objects.filter(hour=hour)
     for w in weathers:
