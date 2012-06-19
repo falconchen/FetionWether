@@ -1,3 +1,4 @@
 ipython
 Django==1.2.7
 django-staticfiles
+BeautifulSoup
