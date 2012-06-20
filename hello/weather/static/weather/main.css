@@ -114,7 +114,7 @@ dt{
     
 }
 
-#forecast ul{width:610px;margin:0 auto; display:none;}
+#forecast ul{width:620px;margin:0 auto; display:none;}
 .cast {display:inline; float:left; }
 #location {font-weight:bold;color:#336699;}
 #ip_address {    
