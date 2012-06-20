@@ -1,7 +1,7 @@
 #!/home/dotcloud/env/bin/python
 #coding:utf-8
 
-import sys,os,threading,time,urllib2,json
+import sys,os,threading,time,urllib2,json,traceback
 from datetime import datetime,timedelta
 
 #only use in dotcloud 
@@ -73,7 +73,7 @@ def sendGroupSms(weather):
                 message = parse_json(weather.info,u)
                 
                 if message == False:
-                    Log(level=0,event='json数据解析出错:订阅天气信息%s:s%' %(weather.cid,weather.hour)).save()
+                    Log(level=0,event='json data parse error: %s:s%' %(weather.cid,weather.hour)).save()
                     return False    
                 
                 if message == None :
@@ -91,7 +91,9 @@ def sendGroupSms(weather):
                     Log(level=2,event = '%s Send to %s[%sh]:%s:(%s)' % (did,u.phone_num,weather.hour,weather.cid.city,message)).save()
         except Exception,e :            
 #            print "except Happen: ",e
-            raise e
+            Log(level=0,event='exception Happen :%s' % e.message).save()
+            traceback.print_exc()
+#            raise e
             if 'ft' in locals():
                 ft.logout()
 
