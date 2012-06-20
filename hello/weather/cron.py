@@ -90,7 +90,8 @@ def sendGroupSms(weather):
                     u.save()                    
                     Log(level=2,event = '%s Send to %s[%sh]:%s:(%s)' % (did,u.phone_num,weather.hour,weather.cid.city,message)).save()
         except Exception,e :            
-            print "except Happen: ",e
+#            print "except Happen: ",e
+            raise e
             if 'ft' in locals():
                 ft.logout()
 
