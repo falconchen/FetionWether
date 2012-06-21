@@ -156,11 +156,12 @@ def parse_json(jdata,user):
         
 
     
-def _current_clock_dt():
-    now = datetime.now()
-    clock_tuple = (now.year, now.month, now.day, now.hour, 0, 0)
-    clock_dt = datetime(*clock_tuple)
-    return clock_dt
+def _current_clock_dt(clock_dt=[]):
+    if len(clock_dt) == 0 :
+        now = datetime.now()
+        clock_tuple = (now.year, now.month, now.day, now.hour, 0, 0)
+        clock_dt.append(datetime(*clock_tuple))
+    return clock_dt[0]
     
 
 
