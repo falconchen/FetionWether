@@ -182,7 +182,7 @@ def main():
     for i in range(len(weathers)):
         info_threads[i].join()
         
-    print "Finish fetching data into db,hour:%s" % hour
+    #print "Finish fetching data into db,hour:%s" % hour
         
 if __name__ == '__main__':
     start = time.time()
