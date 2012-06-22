@@ -63,7 +63,7 @@ def into_db(weather):
 #发飞信
 def sendGroupSms(weather):
     clock_dt = _current_clock_dt()
-    users = weather.user_set.filter(active=True,send_time__lt=clock_dt)
+    users = weather.user_set.filter(active=True,send_time__lt=clock_dt)[0:10] #limit to 10 users/min 
     
     if len(users)>0 :
         try:
