@@ -93,11 +93,13 @@ $(document).ready(
         					$('form#verify').submit();
         				}
         			},
+                                error:function (XMLHttpRequest, textStatus, errorThrown) {
+                                         alert('服务器繁忙，请稍后重试');
+                                }
         			complete: function(XMLHttpRequest, status){
         				if (status == 'error')
-        					alert('验证码错误或超时，请重试')
-                                        else 
-                                        	alert('服务器繁忙，请稍后重试');
+        					alert('验证码错误或超时，请重试');
+                                     
         			}	
         		})
         		
