@@ -1,7 +1,7 @@
 #!/home/dotcloud/env/bin/python
 #coding:utf-8
 
-import sys,os,threading,time,urllib2,json,traceback
+import sys,os,threading,time,urllib2,json,traceback, re
 from datetime import datetime,timedelta
 
 #only use in dotcloud 
@@ -51,8 +51,7 @@ def into_db(weather):
                 i+=1
         else:
              Log(level=1,event="failed to fetch weather info %s" % url).save()
-                
-        weather.info = info        
+        weather.info = re.sub(r'(\-?[\d.]+)(℃|℉)~(\-?[\d.]+)\2',temp_adjust,info)
         weather.save()
         
     
@@ -60,6 +59,12 @@ def into_db(weather):
     
     return True
 
+def temp_adjust(m) :
+    if m.group(1) > m.group(3):
+        return m.group(3) +m.group(2)+'~'+m.group(1) +m.group(2)
+    else :
+        return m.group(1) +m.group(2)+'~'+m.group(3) +m.group(2)
+    
 #发飞信
 def sendGroupSms(weather):
     clock_dt = _current_clock_dt()
@@ -170,7 +175,7 @@ def main():
     info_threads = []
     now = datetime.now()
     hour = now.hour
-    #hour = 17
+    hour = 2
     #weathers = Weather.objects.filter(cid='101300901',hour=hour)
     weathers = Weather.objects.filter(hour=hour)
     for w in weathers:

@@ -1,10 +1,10 @@
 #! /usr/bin/env python
 # coding:utf-8
-import datetime
-from django.db import models
+import datetime, urllib2
+from django.db import models, connection
 #from django.contrib import admin
 from PyWapFetion import Fetion,Errors
-
+from BeautifulSoup import BeautifulSoup
 
 # Create your models here.
 class City(models.Model):
@@ -39,6 +39,16 @@ class Weather(models.Model):
         ordering = ['-fetch_ts']
     
 
+class UserManager(models.Manager):
+
+    def filted_with_cid(self,cid):
+        cursor = connection.cursor()
+        sql = 'SELECT b.* FROM weather_city a, weather_user b, weather_weather c WHERE a.cid like %s AND a.cid=c.cid_id AND b.wid_id=c.id ORDER BY b.id DESC'                
+        cursor.execute(sql,['%s%s' % (cid,'%')])
+        return [int(row[0]) for row in cursor.fetchall()]
+        
+    
+    
 class User(models.Model):
     TYPE_CHOICES = (('E','每日发送三天预报'),('B','可能下雨时才发送')) 
     fid = models.CharField(verbose_name=u'飞信号',max_length = 10,blank = True,) #飞信id号，允许为空
@@ -48,7 +58,7 @@ class User(models.Model):
     reg_ts = models.DateTimeField(verbose_name=u'注册时间',default=datetime.datetime.now)
     active = models.BooleanField(default=True,verbose_name="是否激活")
     send_time = models.DateTimeField(default=datetime.datetime(1970,1,1,0,0,0),verbose_name=u'上次发送时间')
-    
+    objects = UserManager()
     
     def __unicode__(self):
         return self.phone_num
@@ -75,7 +85,31 @@ class Log(models.Model):
         for item in Log.LEVELS:
             if item[0] == self.level:
                 return item[1]  
+
+
+#天气预警
+class Alarm(models.Model):
     
+    #在线取得预警信息
+    @staticmethod
+    def fetch_online():
+        alarm_url = 'http://www.nmc.gov.cn/alarm/index.htm'
+        page = urllib2.urlopen(alarm_url).read()
+        soup = BeautifulSoup(page)
+        tds = soup.findAll('td', width="28")
+        alarms = []
+        for td in tds :
+            title_td = td.nextSibling.nextSibling
+            
+            info = {
+                'id':td.contents[1]['id'],            
+                'link':title_td.contents[1]['href'],
+                'title':title_td.contents[1].text.strip(),
+                'time':title_td.nextSibling.nextSibling.text.replace('&nbsp;','')
+            }
+            alarms.append(info)
+        return alarms
+        
 class MyFetion(Fetion):
     test_id = '299396032'
     limit =5
