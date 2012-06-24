@@ -175,7 +175,7 @@ def main():
     info_threads = []
     now = datetime.now()
     hour = now.hour
-    hour = 2
+    #hour = 2
     #weathers = Weather.objects.filter(cid='101300901',hour=hour)
     weathers = Weather.objects.filter(hour=hour)
     for w in weathers:
