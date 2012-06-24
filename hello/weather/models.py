@@ -158,6 +158,6 @@ class MyFetion(Fetion):
                     pass
                 
         else:
-                Log(event = "5次尝试结束，记入日志 ,Fid: %s " % id).save() 
+                Log(event = u"send sms trying too many times,,Fid: %s " % id).save() 
                 return False
         return True
