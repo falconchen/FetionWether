@@ -1,4 +1,5 @@
 ipython
+pika==0.9.5
 Django==1.2.7
 django-staticfiles
 BeautifulSoup

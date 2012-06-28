@@ -1,13 +1,15 @@
 #!/usr/bin/env python
 #coding:utf-8
-import sys
+import sys,os
 from os.path import pardir, abspath
 
 sys.path.insert(0, abspath(pardir))
 import settings
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from weather.PyWapFetion import Fetion
-phone = settings.FETION[1][0]
-psw = settings.FETION[1][1]
+from weather.models import *
+phone = settings.FETION[0][0]
+psw = settings.FETION[0][1]
 #psw = 'wrong password'
 ft = Fetion(phone, psw,cachefile=None)
 #friend_fid = ft.findid(settings.FETION[0][0])
@@ -21,7 +23,9 @@ msg = '''
 3.相关水域水上作业和过往船舶采取积极的应对措施，加固港口设施，防止船舶走锚、搁浅和碰撞；
 4.加固或者拆除易被风吹动的搭建物,人员切勿随意外出，确保老人小孩留在家中最安全的地方，危房人员及时转移。
 '''
-
+#msg = "hello\n world"
+msg = Alarm.fetch_content(url='/sjyj/0002002/201206271725579570.htm')
+print ft.sendBYid('299396032',msg.encode('utf-8'))
 
 
 #add = ft.send(settings.FETION[1][0],'hello man')

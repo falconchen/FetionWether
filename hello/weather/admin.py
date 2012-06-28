@@ -2,7 +2,7 @@
 # coding:utf-8
 
 from django.contrib import admin
-from weather.models import City,User,Weather,Log
+from weather.models import City,User,Weather,Log,Alarm,AlarmLog
 
 
 class CityAdmin(admin.ModelAdmin):
@@ -25,8 +25,20 @@ class LogAdmin(admin.ModelAdmin):
     list_filter = ('level',)
     date_hirerachy = 'time'
     search_fields = ('event',)
-            
+
+class AlarmAdmin(admin.ModelAdmin):
+    list_display = ('color_id','title','url','content','area_code','pub_time','fetch_time')
+    list_filter = ('area_code','color_id')
+    search_fields = ('title','content','area_code','color_id',)
+    date_hierarchy = 'pub_time'
+
+class AlarmLogAdmin(admin.ModelAdmin):
+    list_display = ('alarm','user','details','send_time')
+    date_hierarchy = 'send_time'
+    
 admin.site.register(City,CityAdmin)
 admin.site.register(User,UserAdmin)
 admin.site.register(Weather,WeatherAdmin)
 admin.site.register(Log,LogAdmin)
+admin.site.register(Alarm,AlarmAdmin)
+admin.site.register(AlarmLog,AlarmLogAdmin)

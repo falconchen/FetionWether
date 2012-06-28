@@ -101,6 +101,7 @@ def sendGroupSms(weather):
 #            raise e
             if 'ft' in locals():
                 ft.logout()
+            
 
 def parse_json(jdata,user):
     try:
@@ -197,3 +198,5 @@ if __name__ == '__main__':
     if send_count > 0 :
         msg = "Send sms count: %s , Threads time Elapsed :%s \n" % (send_count, stop-start) 
         Log(level=1,event = msg ).save()
+        
+    sys.exit(0)
