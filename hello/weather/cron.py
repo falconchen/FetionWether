@@ -109,11 +109,15 @@ def parse_json(jdata,user):
     except:
         return False    
     winfo = info['weatherinfo']
-    tail = u' via飞信天气网: http://tq.sms128.net'
+    today = datetime.today()
+    if datetime(2012,7,1,12,0,0) > today :
+        tail = u'对前段时间因手机欠费导致信息无法发送感到非常抱歉,现已修复, 没什么, 就是去充话费了^_^'
+    else :
+        tail = u' via飞信天气网: http://tq.sms128.net'
     weekday_cn = (u'星期一',u'星期二',u'星期三',u'星期四',u'星期五',u'星期六',u'星期日')
     ch_weekday = lambda day: weekday_cn[day.weekday()]
     ch_date = lambda day: u'%s年%s月%s日' % (day.year,day.month,day.day)
-    today = datetime.today()
+    
     tomorrow = today +timedelta(days=1)
     is_today = (ch_date(today) == winfo['date_y'])
     today_weather = winfo['weather1'] if is_today else winfo['weather2']
