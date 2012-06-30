@@ -224,7 +224,7 @@ def get_code(request):
         phone_num = form.cleaned_data.get('phone_num')    
         fid = form.fid
     import random
-    chars = 'abcdefghjklmnopqrstuvwxyz123456789'.upper() * 5
+    chars = 'abcdefghjklmnpqrstuvwxyz123456789'.upper() * 5
     code = ''.join(random.sample(chars, 6))
     t = loader.get_template('sms.html')
     sms = t.render(Context({'code': code}))
