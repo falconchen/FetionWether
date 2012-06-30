@@ -134,7 +134,7 @@ function get_weather(id) {
         $('#today_cast').html('今天: ' + today_cast +';');
         $('#tomorrow_cast').html('明天: ' + tomorrow_cast+'.');  
         if (ip !="undefined") {$('#ip_address').html('<b>您的IP:</b> ' + ip.replace(/_/g,''));}
-        $('#forecast ul').fadeIn();
+        $('#forecast ul').css('display','inline-block').fadeIn();
       });
     }
 }

@@ -110,11 +110,11 @@ dt{
     height: 25px;
     line-height: 25px;
     margin: 0;
-    text-align:left;
+    text-align:center;
     
 }
 
-#forecast ul{width:620px;margin:0 auto; display:none;}
+#forecast ul{width:650px;margin:0 auto; display:none;}
 .cast {display:inline; float:left; }
 #location {font-weight:bold;color:#336699;}
 #ip_address {    
@@ -122,7 +122,8 @@ dt{
     display:inline;
     margin-right: 10px;
     color:#369;
-     text-decoration: underline;
+    text-decoration: underline;
+    padding-left: 10px;
 }
 #today_cast,#tomorrow_cast { padding-left:5px;}
 
