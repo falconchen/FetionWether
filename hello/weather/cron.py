@@ -111,7 +111,7 @@ def parse_json(jdata,user):
     winfo = info['weatherinfo']
     today = datetime.today()
     if datetime(2012,7,1,12,0,0) > today :
-        tail = u'对前段时间因手机欠费导致信息无法发送感到非常抱歉,现已修复, 没什么, 就是去充话费了^_^'
+        tail = u'(对前段时间因手机欠费导致信息无法发送感到非常抱歉,现已修复, 也没什么, 就是去充话费了)'
     else :
         tail = u' via飞信天气网: http://tq.sms128.net'
     weekday_cn = (u'星期一',u'星期二',u'星期三',u'星期四',u'星期五',u'星期六',u'星期日')
