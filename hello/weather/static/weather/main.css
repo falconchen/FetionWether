@@ -19,7 +19,12 @@ h2 {
     margin:15px 5px 5px 0;
     
 }
-
+h3 { 
+    color: red;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: center;
+}
 body{
     background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     
     font-family: Verdana;
