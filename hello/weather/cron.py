@@ -34,7 +34,7 @@ class InfoThread(threading.Thread):
         apply(self.func,self.args)
 
 def into_db(weather):
-    if weather.fetch_ts < _current_clock_dt() or weather.info=='':
+    if weather.fetch_ts < current_clock_dt() or weather.info=='':
         #仅当当前数据过期才获取
         limit = 5
         base_url = 'http://m.weather.com.cn/data/%s.html'
@@ -67,7 +67,7 @@ def temp_adjust(m) :
     
 #发飞信
 def sendGroupSms(weather):
-    clock_dt = _current_clock_dt()
+    clock_dt = current_clock_dt()
     users = weather.user_set.filter(active=True,send_time__lt=clock_dt)[0:10] #limit to 10 users/min 
     
     if len(users)>0 :
@@ -166,7 +166,7 @@ def parse_json(jdata,user):
         
 
     
-def _current_clock_dt(clock_dt=[]):
+def current_clock_dt(clock_dt=[]):
     if len(clock_dt) == 0 :
         now = datetime.now()
         clock_tuple = (now.year, now.month, now.day, now.hour, 0, 0)
@@ -200,7 +200,7 @@ if __name__ == '__main__':
     main()    
     stop = time.time()    
     if send_count > 0 :
-        msg = "Send sms count: %s , Threads time Elapsed :%s \n" % (send_count, stop-start) 
-        Log(level=1,event = msg ).save()
-        
+        msg = "Send sms count: %s , Threads time Elapsed :%s \n" % (
+        send_count, stop-start) 
+        Log(level=1,event = msg ).save()        
     sys.exit(0)

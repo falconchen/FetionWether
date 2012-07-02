@@ -48,7 +48,7 @@ class Weather(models.Model):
     )
     cid = models.ForeignKey(City)
     hour = models.CharField(max_length=2,choices=HOURS_CHOICES)
-    info = models.TextField()
+    info = models.TextField(blank=True)
     fetch_ts = models.DateTimeField(auto_now=True,verbose_name=u'获取时间')
     
 
@@ -63,9 +63,9 @@ class UserManager(models.Manager):
 
     def filted_with_cid(self,cid):
         cursor = connection.cursor()
-        sql = 'SELECT b.* FROM weather_city a, weather_user b, weather_weather c WHERE a.cid like %s AND a.cid=c.cid_id AND b.wid_id=c.id ORDER BY b.id DESC'                
+        sql = 'SELECT b.* FROM weather_city a, weather_user b, weather_weather c WHERE a.cid like %s AND a.cid=c.cid_id AND b.wid_id=c.id  AND b.active=1 ORDER BY b.id DESC'                
         cursor.execute(sql,['%s%s' % (cid,'%')])
-        return [int(row[0]) for row in cursor.fetchall()]
+        return [User.objects.get(id=row[0]) for row in cursor.fetchall()]
         
     
     
@@ -116,10 +116,12 @@ class Alarm(models.Model):
     content = models.TextField(verbose_name=u'预警内容',blank=True)    
     pub_time = models.DateTimeField(verbose_name=u'发布时间')
     fetch_time = models.DateTimeField(verbose_name=u'获取时间',auto_now=True)
-    
+
+    class Meta:
+        ordering = ['-id']    
     
     def __unicode__(self):
-        return "%s(%s-%s):%s" % (self.title,self.color_id,self.pub_time,self.content)     
+        return "%s(%s-%s)" % (self.title,self.area_code,self.pub_time)     
     
     '''在线取得预警信息,参数表示是否过滤含解除字样的预警信息，默认过滤'''
     @staticmethod
@@ -162,6 +164,8 @@ class Alarm(models.Model):
         page = urllib2.urlopen(url).read()
         soup = BeautifulSoup(page)
         alarmtexts = soup.findAll(id=re.compile('alarmtext'))
+        if u'解除' in alarmtexts[0].text:
+            return alarmtexts[0].text.strip()
         return '\n'.join([alarmtext.text.strip() for alarmtext in alarmtexts])
 
         
@@ -172,6 +176,9 @@ class AlarmLog(models.Model):
     user = models.ForeignKey(User)
     details = models.TextField(verbose_name=u'详细信息',blank=True)
     send_time = models.DateTimeField(verbose_name=u'发送时间',auto_now=True)
+    
+    def __unicode__(self):
+        return u'%s/%s' % (self.user,self.alarm)
         
 class MyFetion(Fetion):
     test_id = '299396032'
