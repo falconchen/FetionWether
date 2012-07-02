@@ -21,7 +21,7 @@ from weather.models import MyFetion, Log, User,City,Weather, Alarm,AlarmLog
 from cron import current_clock_dt
 
 #环境设置
-MODE = ('TEST','PRODUCT','DEVEL',)[2]
+MODE = ('TEST','DEVEL','PRODUCT',)[2]
 
 PHONE = settings.FETION[0][0]
 PSW = settings.FETION[0][1]
@@ -103,7 +103,8 @@ def send_alarm_sms():
             content = u'[%s]\n%s %s' % (alarm.title,alarm.content,tail)
             send_result = ft.sendBYid(fid, content.encode('utf-8'))
             #测试和开发时给自己发送
-            if MODE != 'PRODUCT':ft.send2self(content.encode('utf-8'))
+            #if MODE != 'PRODUCT':pass
+            ft.send2self(content.encode('utf-8'))
             if send_result == True or send_result == None: 
                 send_count +=1
                 did = "OK" if send_result == True else "Failed"
