@@ -31,7 +31,7 @@ SEND_MAX = 50 #短信队列最大发送次数
 def fetch_new_alarms():
     fetch_count = 0 
     alarms = Alarm.fetch_online(cancel=False)       
-    if Alarm.objects.filter(url=alarms[0]['url']).count() == 0:
+    if Alarm.objects.filter(url=alarms[0]['url']).count() > 0:
         return 0
     all_areas = City.get_all_areas()
     cities_below = {}
