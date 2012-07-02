@@ -22,12 +22,19 @@ from cron import current_clock_dt
 
 #环境设置
 MODE = ('TEST','DEVEL','PRODUCT',)[2]
-
 PHONE = settings.FETION[0][0]
 PSW = settings.FETION[0][1]
 LOGIN_LIMIT = 5
 SEND_MAX = 50 #短信队列最大发送次数
 
+
+def is_ignore_city(title):    
+    '''以下城市无法提供预警'''
+    ignore_list = (u'襄阳',u'延边',)
+    for city in ignore_list:
+        if city in title:return True
+    else:return False
+    
 def fetch_new_alarms():
     fetch_count = 0 
     alarms = Alarm.fetch_online(cancel=False)       
@@ -68,13 +75,17 @@ def fetch_new_alarms():
         alarm_obj.title,alarm_obj.pub_time,alarm_obj.area_code)).save()
         
     return fetch_count
-        
+
+
+    
 def send_alarm_sms():
     #组装飞信发送列表,测试数据为2012月7月2日12时
     clock = datetime(2012,7,2,16,0,0,0) if MODE == 'TEST' else current_clock_dt()    
     current_alarms = Alarm.objects.filter(pub_time=clock)    
     to_send_list = []
     for current_alarm in current_alarms :
+        if is_ignore_city(current_alarm.title):
+            continue
         users = User.objects.filted_with_cid(current_alarm.area_code)
         if (len(users)>0 and current_alarm.content == ''):
             current_alarm.content = Alarm.fetch_content(current_alarm.url)
