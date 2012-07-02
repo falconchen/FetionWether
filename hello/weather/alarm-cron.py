@@ -63,7 +63,7 @@ def fetch_new_alarms():
             
         #print alarm_obj.area_code,alarm_obj.title
         alarm_obj.save()
-        count+=1
+        fetch_count+=1
         Log(level=1,event="new alarm:%s-%s(%s)" % (
         alarm_obj.title,alarm_obj.pub_time,alarm_obj.area_code)).save()
         
