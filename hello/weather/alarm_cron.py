@@ -121,12 +121,12 @@ def send_alarm_sms():
                 did = "OK" if send_result == True else "Failed"
                 details = 'status:%s,area_code:%s,content:%s' % (
                 did,alarm.area_code,content)
-                try:
-                    AlarmLog(alarm=alarm,user=user,details=details).save()
-                except Except,e :
-                    error_msg = 'Send Alarm error:%s:%s:%s' % (e,alarm,user)
-                    Log(level=0,event = error_msg).save()
-                    if MODE != 'PRODUCT': print error_msg                
+            try:
+                AlarmLog(alarm=alarm,user=user,details=details).save()
+            except Except,e :
+                error_msg = 'Send Alarm error:%s:%s:%s' % (e,alarm,user)
+                Log(level=0,event = error_msg).save()
+                if MODE != 'PRODUCT': print error_msg                
             if MODE != 'PRODUCT': print user.phone_num,content        
         ft.logout()
     

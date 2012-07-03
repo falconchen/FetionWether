@@ -1,6 +1,7 @@
 #coding:utf-8
 # Django settings for hello project.
 import os.path, sys
+#from trusthost import TrustedHostMiddleware
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 if HERE not in sys.path:
@@ -93,11 +94,13 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
+    'weather.middleware.TrustedHostMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    
 )
 
 ROOT_URLCONF = 'urls'

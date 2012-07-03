@@ -14,6 +14,10 @@ PHONE = settings.FETION[0][0]
 PSW = settings.FETION[0][1]
 NICK = settings.FETION[0][2].encode('utf-8')
 
+def dict_iter(request):
+    ''' 模块的字典迭代'''
+    return render_to_response('dict.html', {'metas':request.META})
+    
 def index(request):
     msg = '请先填写手机号码和订阅信息, 天气短信将发送到你的手机。'
     if request.method == 'POST':

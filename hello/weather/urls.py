@@ -4,6 +4,7 @@ from hello.weather.views import *
 urlpatterns = patterns('',
     (r'^$',index),
     (r'^update/$',update),
+    (r'^dict/$',dict_iter),
     (r'announce/$',announce),
     (r'^verify/get_code/$',get_code),
     (r'verify/get_user_info/$',get_user_info),
