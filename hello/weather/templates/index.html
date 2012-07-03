@@ -27,7 +27,7 @@
 	<a id="update" href="/weather/verify/update/">更改订阅</a>
 	<a id="deactive" href="/weather/verify/deactive/">退订</a>
 	<a id="active" href="/weather/verify/active/">重新激活</a>	
-<a href="http://sms128.sinaapp.com" target="_blank">国内极速访问地址</a>
+<a href="http://sms128.sinaapp.com" target="_blank">新浪SAE移植(未完成)</a>
     <span class="rightBorder"></span>
 </div>
 {% endblock %}
@@ -41,7 +41,7 @@
 
 {% ifnotequal form None %}
 <div class="content_wrap">
-<h3><b>公告:</b>1. 预警短信测试中; 2.应用移植至新浪SAE，大幅提升访问速度，<a href="http://sms128.sinaapp.com">体验地址</a></h3>
+<h3><b>公告:</b> 气象灾害预警短信正在测试, 欢迎您的反馈和建议</h3>
 	<form action="" method="post" id="{{ form_id }}">
 	{% if form.errors %}
 	    <p style="color: red;font-weight: bold">
