@@ -115,7 +115,7 @@ def send_alarm_sms():
             send_result = ft.sendBYid(fid, content.encode('utf-8'))
             #测试和开发时给自己发送
             #if MODE != 'PRODUCT':pass
-            debug_content = u'%s-%s:%s'  %(user.phone_num,alarm.area_code,content)
+            details = u'%s-%s:%s'  %(user.phone_num,alarm.area_code,content)
             ft.send2self(debug_content.encode('utf-8'))
             if send_result == True or send_result == None: 
                 send_count +=1
