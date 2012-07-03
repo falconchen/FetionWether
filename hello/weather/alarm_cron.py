@@ -123,7 +123,7 @@ def send_alarm_sms():
                 did,alarm.area_code,content)
             try:
                 AlarmLog(alarm=alarm,user=user,details=details).save()
-            except Except,e :
+            except Exception,e :
                 error_msg = 'Send Alarm error:%s:%s:%s' % (e,alarm,user)
                 Log(level=0,event = error_msg).save()
                 if MODE != 'PRODUCT': print error_msg                
