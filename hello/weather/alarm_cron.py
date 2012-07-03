@@ -116,7 +116,7 @@ def send_alarm_sms():
             #测试和开发时给自己发送
             #if MODE != 'PRODUCT':pass
             details = u'%s-%s:%s'  %(user.phone_num,alarm.area_code,content)
-            ft.send2self(debug_content.encode('utf-8'))
+            ft.send2self(details.encode('utf-8'))
             if send_result == True or send_result == None: 
                 send_count +=1
                 did = "OK" if send_result == True else "Failed"
