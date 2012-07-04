@@ -115,7 +115,7 @@ $(document).ready(
 //加载天气信息脚本，并加信息渲染到当前页
 function get_weather(id) {
     if("undefined" != typeof id) {
-      var dataUrl = "http://www.onephper.tk/weather/wt_jsonp.php?id=" + id ;
+      var dataUrl = "http://falcon.sinaapp.com/weather/wt_jsonp.php?id=" + id ;
       jQuery.getJSON(dataUrl+"&callback=?", 
       function(data) {
           //console.log(data);
