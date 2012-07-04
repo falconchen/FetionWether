@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>dotCloud Status Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="dotCloud.com Status Page">
+  <meta name="author" content="dotCloud.com">
+
+  <!-- Le styles -->
+  <link href="static/css/bootstrap.min.blue.css" rel="stylesheet">
+  <style type="text/css">
+    body {
+      padding-top: 60px;
+      padding-bottom: 40px;
+    }
+  </style>
+  <link href="static/css/bootstrap-responsive.css" rel="stylesheet">
+  <link rel="shortcut icon" type="image/x-icon" href="static/favicon.ico">
+
+  <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  
+
+</head>
+<body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Status.dotCloud.com</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="divider-vertical"></li>
+              <li><a href="http://docs.dotcloud.com"><i class="icon-book icon-white"></i> Documentation</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="http://help.dotcloud.com"><i class="icon-warning-sign icon-white"></i> Help Page</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="https://twitter.com/dotcloudstatus">@dotCloudStatus</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="http://support.dotcloud.com"><i class="icon-user icon-white"></i> Support</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="http://platform-status.dotcloud.com">Platform Status</a></li>
+              <li class="divider-vertical"></li>
+              <li><a href="/admin"><i class="icon-lock icon-white"></i> Admin</a></li>
+              <li class="divider-vertical"></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+    <div class="row">
+        <div class='span2'>
+            <p><img src="static/img/dotcloud_logo_small.png" /></p>
+        </div>
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="span8">
+      <div class="page-header">
+        <h1>Status.dotCloud.com</h1>
+        <br/>
+        <p>Here is a list of system status update messages for the dotCloud platform</p>
+      </div>
+     </div>
+   </div>
+
+
+<h2>Recent Status Messages</h2>
+<table class="table table-striped table-bordered table-condensed">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Message</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+          <tr><td>07-02-12 15:21</td><td>Our supervision detected a misbehaving EC2 instance; it being rebooted right now. Scaled applications are unaffected.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>07-02-12 07:33</td><td>We&#39;ve completed the integrity checks of our EBS volumes and recovered the majority of our hosts from the leap second bug.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>07-02-12 04:25</td><td>The EC2 outage caused significant data corruption to EBS volumes, and we&#39;re systematically verifying the health of those volumes. We&#39;re also dealing with a fraction of apps which crashed due to the leap second bug.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>07-01-12 13:30</td><td>All systems go.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>07-01-12 13:15</td><td>Our supervision detected a misbehaving EC2 instance; it just rebooted. Scaled applications are unaffected.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>07-01-12 07:48</td><td>While our platform is stable now, please let us know via http://support.dotcloud.com if you believe your application is experiencing degraded service.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>07-01-12 07:47</td><td>The EC2 instance is fully recovered and stable.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>07-01-12 02:43</td><td>Some user services on a failing EC2 host are down while we work to recover it. Scaled applications are unaffected.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-30-12 23:26</td><td>Our API and user applications have been fully recovered.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>06-30-12 11:02</td><td>Almost all your applications should be running fine by now. We only have one host down and we are working on getting our APIs back online.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-30-12 09:19</td><td>We are getting our EC2 instances back into control and are rebooting the ones still down as fast as possible.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-30-12 03:24</td><td>It looks like AWS is having issues again,we have numerous EC2 instances that are no longer responding,we will let you know when we know more</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-29-12 20:30</td><td>With the EC2 hiccups this morning our code updates are postponed to Tuesday 10AM PDT (http://timeanddate.com/worldclock/fixedtime.html?iso=20120703T10&amp;p1=224&amp;am=30). CLI will be under maintenance for ~30mn, apps will run as usual.
+</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>06-29-12 18:14</td><td>The last failing ec2 host is now back to normal as well. Feel free to report any issue to the dotCloud support.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>06-29-12 17:47</td><td>Our API service is now back to normal. However one of our ec2 instance is still experiencing issues. We&#39;re working on resolving the problem.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-29-12 15:54</td><td>There is an EC2 outage that is causing some of our instances to have problems. We are in the process of working around the issues, and hope to have an update soon.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-29-12 00:00</td><td>We are planning code updates tomorrow 10AM PDT (http://timeanddate.com/worldclock/fixedtime.html?iso=20120629T10&amp;p1=224&amp;am=30). The CLI will be under maintenance for ~30mn, apps will run as usual.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>06-28-12 08:40</td><td>The EC2 instances is back and services running on it are being restarted.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>06-28-12 08:32</td><td>Our supervision detected a misbehaving EC2 instance; it being rebooted right now. Scaled applications are unaffected.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-26-12 18:40</td><td>All systems go.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>06-26-12 16:08</td><td>Our supervision detected another misbehaving EC2 instance; it&#39;s being rebooted right now. Scaled applications are unaffected.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-22-12 05:01</td><td>All systems go</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+          <tr><td>06-22-12 04:50</td><td>Our supervision detected another misbehaving EC2 instance; it&#39;s being rebooted right now. Scaled applications are unaffected.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-22-12 04:48</td><td>Our supervision detected a misbehaving EC2 instance; it just rebooted. Scaled applications are unaffected.</td>
+              <td><span class="label label-warning">
+              
+              warning</span></td></tr>
+        
+          <tr><td>06-21-12 22:27</td><td>The EC2 instance and the services running on it restarted successfully.</td>
+              <td><span class="label label-success">
+              
+              up</span></td></tr>
+        
+    </tbody>
+</table>
+
+
+      <hr>
+      <footer>
+        <p>&copy; 2012 dotCloud </p>
+      </footer>
+    </div> <!-- /container -->
+</body>
+</html>
