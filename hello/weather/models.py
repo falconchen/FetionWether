@@ -131,11 +131,13 @@ class Alarm(models.Model):
         soup = BeautifulSoup(page)
         tds = soup.findAll('td', width="28")
         alarms = []
+        now = datetime.datetime.now()
         for td in tds :
             title_td = td.nextSibling.nextSibling
             title = title_td.contents[1].text.strip()
             pub_time = title_td.nextSibling.nextSibling.text.replace('&nbsp;','')
             pub_time = Alarm.chdate_convert(pub_time)
+            if pub_time > now : continue #为了处理气象网站发布日期错误的情况
             if cancel and u'解除' in title: continue                
             info = {
                 'color_id':td.contents[1]['id'],            
@@ -143,6 +145,7 @@ class Alarm(models.Model):
                 'title':title,
                 'pub_time': pub_time
             }
+             
             alarms.append(info)
         return alarms
         
