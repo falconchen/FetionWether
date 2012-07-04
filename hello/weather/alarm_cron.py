@@ -30,7 +30,7 @@ SEND_MAX = 50 #短信队列最大发送次数
 
 def is_ignore_city(title):    
     '''以下城市无法提供预警'''
-    ignore_list = (u'襄阳',u'延边',u'甘南')
+    ignore_list = (u'襄阳',u'延边',u'甘南',u'陇南',u'伊犁',)
     for city in ignore_list:
         if city in title:return True
     else:return False
