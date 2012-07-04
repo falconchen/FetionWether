@@ -114,7 +114,7 @@ def send_alarm_sms():
             content = u'[%s]\n%s %s' % (alarm.title,alarm.content,tail)            
             #测试和开发时给自己发送
             #if MODE != 'PRODUCT':pass
-            details = u'status:failed %s-%s:%s'  %(user.phone_num,alarm.area_code,content)
+            details = u'status:ready %s-%s:%s'  %(user.phone_num,alarm.area_code,content)
             #保证先写入库成功再发送，不会造成重复发送，入库时失败，不会向该用户发送
             #但是存在一个问题，即入库成功，但发送失败，即下面的sendBYid失败后，不会再向该用户发送
             #如果脚本在sendBYid中断,日志信息(details列)也不会获得更新，即使是发送成功，也会显示status:failed。
@@ -129,8 +129,8 @@ def send_alarm_sms():
                 if send_result == True or send_result == None: 
                     send_count +=1
                     did = "OK" if send_result == True else "Failed"
-                    details = 'status:%s,area_code:%s,content:%s' % (
-                    did,alarm.area_code,content)
+                    details = 'status:%s,%s,area_code:%s,content:%s' % (
+                    did,user.phone_num,alarm.area_code,content)
                     AlarmLog.objects.filter(
                     alarm=alarm,user=user).update(details=details)
             #将发送结果发给自己        
