@@ -29,8 +29,15 @@ SEND_MAX = 50 #短信队列最大发送次数
 
 
 def is_ignore_city(title):    
-    '''以下城市无法提供预警'''
+    '''以下城市无法提供预警,使用in_ignore_text判断，这里不使用了'''
     ignore_list = (u'襄阳',u'延边',u'甘南',u'陇南',u'伊犁',)
+    for city in ignore_list:
+        if city in title:return True
+    else:return False
+
+def in_ignore_text(title):
+    '''省级预警出现以下字样不提供预警'''
+    ignore_list = (u'市',u'自治州')
     for city in ignore_list:
         if city in title:return True
     else:return False
@@ -84,7 +91,10 @@ def send_alarm_sms():
     current_alarms = Alarm.objects.filter(pub_time=clock)    
     to_send_list = []
     for current_alarm in current_alarms :
-        if is_ignore_city(current_alarm.title):
+        # if is_ignore_city(current_alarm.title):
+            # continue
+        '''省级预警存在市级行政区字样时忽略'''    
+        if len(current_alarm.area_code) == 5 and in_ignore_text(current_alarm.title):
             continue
         users = User.objects.filted_with_cid(current_alarm.area_code)
         if (len(users)>0 and current_alarm.content == ''):
