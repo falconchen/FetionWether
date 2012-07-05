@@ -19,7 +19,7 @@ else:
     msg = "Hello Guy : %s"  % strftime("%Y-%m-%d %H:%M:%S")
 
 
-ft = MyFetion(phone, psw)
+ft = MyFetion(phone, psw,False)
 print ft
 #friend_fid = ft.findid(settings.FETION[0][0])
 #print friend_fid

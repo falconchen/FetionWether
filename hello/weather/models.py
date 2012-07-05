@@ -194,8 +194,8 @@ class MyFetion(Fetion):
         super(MyFetion,self).__init__(mobile,password,status,cachefile,keepalive)
     
     #定义最大尝试次数
-    
-    def sendBYid(self,id,message,sm=True):
+    #默认不是非得发到对方手机
+    def sendBYid(self,id,message,sm=False):
          
         for i in range(self.limit):
                 try:                    
