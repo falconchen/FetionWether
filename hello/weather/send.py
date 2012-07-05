@@ -20,6 +20,7 @@ else:
 
 
 ft = MyFetion(phone, psw)
+print ft
 #friend_fid = ft.findid(settings.FETION[0][0])
 #print friend_fid
 #print ft.addfriend(settings.FETION[0][0],'飞信天气','2')

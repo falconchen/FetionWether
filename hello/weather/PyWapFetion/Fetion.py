@@ -67,7 +67,7 @@ class Fetion(object):
     def sendBYid(self,id,message,sm=False):
         url = ('im/chat/sendMsg.action?touserid=%s' % id) if sm else ('im/chat/sendShortMsg.action?touserid=%s' % id)
         htm = self.open(url,{'msg':message})
-        #print htm
+        print htm
         if '对方不是您的好友' in htm: raise FetionNotYourFriend  
         return False if id is None else '成功' in htm
 
