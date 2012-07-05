@@ -139,7 +139,7 @@ class Fetion(object):
         return tuple(set(users))
            
     def open(self,url,data=''):
-        try: html = GzipFile(fileobj=StringIO(self.opener.open(Request('http://f.10086.cn/%s' % url,data=urlencode(data),headers={'Accept-encoding':'gzip'})).read())).read()
+        try: html = GzipFile(fileobj=StringIO(self.opener.open(Request('http://f.10086.cn/%s' % url,data=urlencode(data),headers={'Accept-encoding':'gzip','x-forwarded-for':'202.204.76.254'})).read())).read()
         except: html = self.opener.open(Request('http://f.10086.cn/%s' % url,data=urlencode(data))).read()
         if '登录' in html and '您正在登录中国移动WAP飞信' not in html: raise FetionNotLogin
         return html
