@@ -24,6 +24,7 @@ h3 {
     font-size: 12px;
     font-weight: normal;
     text-align: center;
+    margin-top:5px;
 }
 body{
     background: url("bg.png") repeat-x scroll 0 0 #E5ECF4;     
@@ -33,7 +34,7 @@ body{
     padding:0;
     list-style: none outside none;
     }
-#nav { background: url("guide_mid.png") repeat-x scroll 0 0 transparent; font-size: 12px; height: 24px;clear:both; }
+#nav,.title { background: url("guide_mid.png") repeat-x scroll 0 0 transparent; font-size: 12px; height: 24px;clear:both; }
 #nav a {
     
     color:#FFF;
@@ -45,14 +46,14 @@ body{
     text-decoration: none;
 }
 #nav a:hover {color:#FFCC00}
-#nav .leftBorder {
+.leftBorder {
     background: url("guide_left.png") no-repeat scroll 0 0 transparent;
     float: left;
     height: 24px;
     width: 10px;
 
 }
-#nav .rightBorder {
+.rightBorder {
     background: url("guide_right.png") no-repeat scroll 0 0 transparent;
     float: right;
     height: 24px;
@@ -65,7 +66,7 @@ body{
     height: 18px;
     padding-left:10px;
 }
-#wrapper {width:600px;margin: 5px auto;}
+#wrapper {width:850px;margin: 15px auto;}
 
 .content_wrap {
     background: url("bg_newslist.png") repeat-y scroll 0 0 transparent;
@@ -134,3 +135,41 @@ dt{
 
 #nav a.highlight { color:#FFFF00}
 a#get_code:hover {text-decoration:underline;color:#369;}
+
+#left_side{
+    clear: both;
+    float: left;
+    width: 600px;
+}
+#right_side{    
+    float: left;
+
+    margin-left:10px;
+    width:240px;
+}
+div.title .midBlock {
+    color: #FFFFFF;
+    float: left;
+    font-weight: bold;
+    text-indent: 1em;
+}
+div.title span {
+    display: block;
+    height: 24px;
+    line-height: 24px;
+}
+#votes dl {
+
+    background: url("bg_vote.png") repeat-y scroll 0 0 transparent;
+    /*border-color: -moz-use-text-color #336699 #336699;*/
+    border: 1px solid #336699;
+    border-style: none solid solid;
+    border-width: 0 1px 1px;
+    padding: 5px;
+    margin:0;
+
+}
+#vote_content p {
+    margin:3px;
+    text-align:center;
+}
