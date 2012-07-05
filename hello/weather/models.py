@@ -183,6 +183,9 @@ class AlarmLog(models.Model):
     def __unicode__(self):
         return u'%s/%s' % (self.user,self.alarm)
         
+    class Meta:
+        ordering = ['-send_time']            
+        
 class MyFetion(Fetion):
     test_id = '299396032'
     limit =5

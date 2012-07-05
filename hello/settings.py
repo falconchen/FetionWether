@@ -30,6 +30,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
+        #'ENGINE': 'pymysql_django',
         'NAME': 'hello',                      # Or path to database file if using sqlite3.
         'USER': env['DOTCLOUD_DB_MYSQL_LOGIN'],                      # Not used with sqlite3.
         'PASSWORD': env['DOTCLOUD_DB_MYSQL_PASSWORD'],                  # Not used with sqlite3.
