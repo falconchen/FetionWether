@@ -113,7 +113,7 @@ def parse_json(jdata,user):
     if datetime(2012,7,3,19,0,0) > today :
         tail = u'(via飞信天气网: http://tq.sms128.net 新增预警短信)'
     else :
-        tail = u' via飞信天气网: http://tq.sms128.net'
+        tail = u' via飞信天气网(新地址):http://sms128.sinaapp.com'
     weekday_cn = (u'星期一',u'星期二',u'星期三',u'星期四',u'星期五',u'星期六',u'星期日')
     ch_weekday = lambda day: weekday_cn[day.weekday()]
     ch_date = lambda day: u'%s年%s月%s日' % (day.year,day.month,day.day)
