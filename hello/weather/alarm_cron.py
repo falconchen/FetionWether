@@ -4,6 +4,7 @@
 import sys,os,threading,time,urllib2,json,time
 from BeautifulSoup import BeautifulSoup
 from datetime import datetime,timedelta
+from django.http import HttpResponse
 
 #only use in dotcloud 
 package_dir = '/home/dotcloud/env/lib/python2.6/site-packages'
@@ -150,6 +151,19 @@ def send_alarm_sms():
     
     return send_count
 
+def alarmweb(request):
+    start = time.time()
+    fetch_total = fetch_new_alarms()    
+    send_total = send_alarm_sms()    
+    stop = time.time()
+    event = "Send alarms sms total:%s\nElapse :%6.3f" % (
+    send_total,stop - start)    
+    if send_total > 0:Log(level=1,event=event)
+    event = '%s Fetch new alarms total: %d' % (event,fetch_total)
+    return HttpResponse(event)
+    
+        
+    
 if __name__ == '__main__':
     start = time.time()
     fetch_total = fetch_new_alarms()    

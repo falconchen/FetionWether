@@ -10,8 +10,8 @@ import settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 from weather.PyWapFetion import Fetion
 from weather.models import *
-phone = settings.FETION[1][0]
-psw = settings.FETION[1][1]
+phone = settings.FETION[0][0]
+psw = settings.FETION[0][1]
 #psw = 'wrong password'
 if len(sys.argv)>1 :
     msg = sys.argv[-1] 
@@ -30,9 +30,9 @@ ft = MyFetion(phone, psw)
 #msg = "hello world "
 
 #print ft.sendBYid(id,msg,False)
-test_id = '299396032'
-fid = ft.findid('13556152752')
-print ft.sendBYid(fid,msg,True)
+fid = '299396032'
+#fid = ft.findid('13556152752')
+print ft.sendBYid(fid,msg,False)
 ft.logout()
 
 #add = ft.send(settings.FETION[1][0],'hello man')

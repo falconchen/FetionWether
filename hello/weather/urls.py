@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import *
 from hello.weather.views import *
+from weather.cron import *
+from weather.alarm_cron import *
 
 urlpatterns = patterns('',
     (r'^$',index),
@@ -10,6 +12,8 @@ urlpatterns = patterns('',
     (r'verify/get_user_info/$',get_user_info),
     (r'^verify/(?P<action>\w+)/$',verify),    
     (r'^(?P<cid>\d{9}).js$', cid_js),
-    
+    (r'^cronweb/$',cronweb),
+    (r'^alarmweb/$',alarmweb),
+    (r'^shutdown/$',shutdown),
 
 )

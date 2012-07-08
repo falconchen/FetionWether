@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{% block title %} {{ msg }}, 感谢使用本程序，此服务免费{% endblock %}
+
+{% block content %}
+{{ block.super }}
+
+ <div class="content_wrap">
+ 
+{{details}}
+ 
+</div>
+
+{% endblock %}

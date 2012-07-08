@@ -3,6 +3,7 @@
 
 import sys,os,threading,time,urllib2,json,traceback, re
 from datetime import datetime,timedelta
+from django.http import HttpResponse
 
 #only use in dotcloud 
 package_dir = '/home/dotcloud/env/lib/python2.6/site-packages'
@@ -72,6 +73,7 @@ def sendGroupSms(weather):
     
     if len(users)>0 :
         try:
+            #print PHONE,PSW
             ft = MyFetion(PHONE,PSW)            
                                 
             for u in users :
@@ -96,8 +98,8 @@ def sendGroupSms(weather):
                     Log(level=2,event = '%s Send to %s[%sh]:%s:(%s)' % (did,u.phone_num,weather.hour,weather.cid.city,message)).save()
         except Exception,e :            
 #            print "except Happen: ",e
-            Log(level=0,event='exception Happen :%s' % e.message).save()
-            traceback.print_exc()
+            Log(level=0,event='exception happen :%s' % traceback.print_exc()).save()
+            
 #            raise e
             if 'ft' in locals():
                 ft.logout()
@@ -194,7 +196,20 @@ def main():
         info_threads[i].join()
         
     #print "Finish fetching data into db,hour:%s" % hour
-        
+
+    
+def cronweb(request):
+    start = time.time()
+    main()    
+    stop = time.time()
+    elapsed = stop-start
+    msg ='%d/%.3f' % (send_count,elapsed)
+    if send_count > 0 :
+        msg = "Send sms count: %d , Threads time Elapsed :%.3f \n" % (
+        send_count, elapsed) 
+        Log(level=1,event = msg ).save()    
+    return HttpResponse(msg)
+    
 if __name__ == '__main__':
     start = time.time()
     main()    

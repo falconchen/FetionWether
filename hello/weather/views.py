@@ -215,7 +215,9 @@ def get_user_info(request):
     return render_to_response('user_info.html', {'msg':msg})
     #raise Http404('非法请求')
     
-        
+
+def shutdown(request):
+   return render_to_response('shutdown.html', {'msg':"bye"},context_instance=   RequestContext(request))     
     
     
 #发送验证码
