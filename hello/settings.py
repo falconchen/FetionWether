@@ -16,7 +16,8 @@ json_file = os.path.abspath(os.path.join(HERE,os.path.pardir,os.path.pardir,'env
 with open(json_file) as f:
     env = json.load(f,encoding='utf-8')
 
-DEBUG = True if '127.0.0.1' in env['DOTCLOUD_DB_MYSQL_HOST'] else False
+#DEBUG = True if '127.0.0.1' in env['DOTCLOUD_DB_MYSQL_HOST'] else False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -75,7 +76,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = '/home/dotcloud/data/static/'
 STATIC_URL = '/static/'
 
-ADMIN_MEDIA_PREFIX = '/static/admin/'
+#ADMIN_MEDIA_PREFIX = '/static/admin/'
 #STATICFILES_DIRS = ('/home/dotcloud/data/static/',)
 
 
@@ -118,7 +119,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'staticfiles',
+    #'staticfiles',
+    'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -131,8 +133,8 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
     'django.core.context_processors.media',
-    #'django.core.context_processors.static',
-    'staticfiles.context_processors.static', #
+    'django.core.context_processors.static',
+    #'staticfiles.context_processors.static', #
     'django.contrib.auth.context_processors.auth',
     'django.contrib.messages.context_processors.messages',
 )
