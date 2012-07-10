@@ -16,8 +16,8 @@ json_file = os.path.abspath(os.path.join(HERE,os.path.pardir,os.path.pardir,'env
 with open(json_file) as f:
     env = json.load(f,encoding='utf-8')
 
-#DEBUG = True if '127.0.0.1' in env['DOTCLOUD_DB_MYSQL_HOST'] else False
-DEBUG = True
+DEBUG = True if '127.0.0.1' in env['DOTCLOUD_DB_MYSQL_HOST'] else False
+#DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

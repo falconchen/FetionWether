@@ -9,6 +9,6 @@ class TrustedHostMiddleware(object):
             request.META['TRUSTED_HOSTS'] = '%s %s' % (trust_me,request.META['TRUSTED_HOSTS'])
         else:
             request.META['TRUSTED_HOSTS'] = trust_me        
-        if request.META['HTTP_HOST'] != sae_host and '127.0.0.1' not in request.META['HTTP_HOST']:
+        if request.META['HTTP_HOST'] != sae_host and '127.0.0.1' not in request.META['HTTP_HOST'] and 'www' not in request.META['HTTP_HOST']:
             script_url = request.META['script_url'] if request.META.has_key('script_url') else ''
             return HttpResponsePermanentRedirect('http://%s%s' % (sae_host,script_url))
