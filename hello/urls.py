@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     #('^$',hello_world),
     ('^$',include('weather.urls')),
     ('^weather/',include('weather.urls')),
+    (r'(?P<path>^favicon\.ico$)', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}), #icon url
     (r'^blog/',include('blog.urls')),
     
     # Example:
@@ -27,7 +28,7 @@ if settings.DEBUG == True:
     urlpatterns += patterns('',
         (r'^media/(?P<path>.*)$', 'django.views.static.serve',
          {'document_root': settings.MEDIA_ROOT}),
-         (r'^static/(?P<path>.*)$', 'django.views.static.serve',
+         (r'^(?P<path>favicon.ico$)', 'django.views.static.serve',         
          {'document_root': settings.STATIC_ROOT}),
                             
 ##        (r'^static/(?P<path>.*)$', 'django.views.static.serve',
